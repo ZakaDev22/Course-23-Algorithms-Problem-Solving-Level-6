@@ -1,0 +1,214 @@
+using System;
+using System.Linq;
+
+namespace Selection_Sort
+{
+    public class MySelectionSortAlgorithm
+    {
+        public static int FindTheNumberIndex(int Number, int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == Number)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Using Tuple To return Both The Min Index And The Min Number
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static (int MinIndex, int MinNumber) FindTheMinIndex(int[] nums)
+        {
+            int MinIndex = 0;
+            int MinNumber = nums[0];
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+
+
+                if (i == nums.Length - 1)
+                {
+                    break;
+                }
+                else
+                {
+                    if (MinNumber > nums[i + 1])
+                    {
+                        MinNumber = nums[i + 1];
+                        MinIndex = i + 1;
+                    }
+                }
+            }
+
+            return (MinIndex, MinNumber);
+
+        }
+
+
+        /// <summary>
+        ///  her I Use My Own Functions To My Own Solution
+        /// </summary>
+        /// <param name="Arr"></param>
+        public static void MySelectionSortByAsc(int[] Arr)
+        {
+            int MinNumberIndex = 0;
+            int MinNumber = 0;
+            int Temp = 0;
+
+
+            for (int i = 0; i < Arr.Length; i++)
+            {
+                // this for the first time we check For The Min Number, We Will Check On The Full Array
+                if (i == 0)
+                {
+                    var tuple = FindTheMinIndex(Arr);
+                    MinNumberIndex = tuple.MinIndex;
+                    MinNumber = tuple.MinNumber;
+                }
+                // And This Code For Each Time After, Her We Will Check By Left One Elements Each Time
+                else
+                {
+                    int[] newArray = Arr.Where(x => x > MinNumber).ToArray();
+                    var tuple = FindTheMinIndex(newArray);
+
+                    MinNumberIndex = FindTheNumberIndex(tuple.MinNumber, Arr);
+                    MinNumber = tuple.MinNumber;
+                }
+
+
+                if (Arr[i] > Arr[MinNumberIndex])
+                {
+                    Temp = Arr[i];
+                    Arr[i] = Arr[MinNumberIndex];
+                    Arr[MinNumberIndex] = Temp;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Here I Use Built in Functions Like Array Methods And Linq Methods For My Own Solution
+        /// </summary>
+        /// <param name="Arr"></param>
+        public static void MySelectionSortByDesc(int[] Arr)
+        {
+            int MaxNumberIndex = 0;
+            int MaxNumber = 0;
+            int Temp = 0;
+
+            for (int i = 0; i < Arr.Length; i++)
+            {
+                if (i == 0)
+                {
+                    MaxNumber = Arr.Max();
+                    MaxNumberIndex = Array.IndexOf(Arr, MaxNumber);
+                }
+                else
+                {
+                    int[] newArray = Arr.Where(x => x < MaxNumber).ToArray();
+
+                    MaxNumber = newArray.Max();
+
+                    MaxNumberIndex = Array.IndexOf(Arr, MaxNumber);
+
+                }
+
+                if (Arr[i] < Arr[MaxNumberIndex])
+                {
+                    Temp = Arr[i];
+                    Arr[i] = Arr[MaxNumberIndex];
+                    Arr[MaxNumberIndex] = Temp;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Teacher Solution
+        /// </summary>
+        /// <param name="arr"></param>
+        static void SelectionSortAsc(int[] arr)
+        {
+            int n = arr.Length;
+
+            // One by one move boundary of unsorted subarray
+            for (int i = 0; i < n - 1; i++)
+            {
+                // Find the minimum element in unsorted array
+                int minIndex = i;
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (arr[j] < arr[minIndex])
+                        minIndex = j;
+                }
+
+                // Swap the found minimum element with the first element
+                int temp = arr[minIndex];
+                arr[minIndex] = arr[i];
+                arr[i] = temp;
+            }
+        }
+
+        /// <summary>
+        /// Teacher Solution
+        /// </summary>
+        /// <param name="arr"></param>
+        static void SelectionSortDesc(int[] arr)
+        {
+            int n = arr.Length;
+
+            // One by one move boundary of unsorted subarray
+            for (int i = 0; i < n - 1; i++)
+            {
+                // Find the Maximum element in unsorted array
+                int maxIndex = i;
+                for (int j = i + 1; j < n; j++)
+                    if (arr[j] > arr[maxIndex])
+                        maxIndex = j;
+
+                // Swap the found minimum element with the first element
+                int temp = arr[maxIndex];
+                arr[maxIndex] = arr[i];
+                arr[i] = temp;
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            int[] Arr = { 22, 55, 25, 44, 600, 1, 90, 500, 323 };
+
+
+            Console.Write("\n\nArray elements Before Selection Sorted Method : ");
+            foreach (int i in Arr)
+            {
+                Console.Write(i + " ");
+            }
+
+
+            MySelectionSortByAsc(Arr);
+
+            Console.Write("\n\nArray elements After Selection Sorted Method By Asc: ");
+            foreach (int i in Arr)
+            {
+                Console.Write(i + " ");
+            }
+
+
+            MySelectionSortByDesc(Arr);
+
+            Console.Write("\n\nArray elements After Selection Sorted Method By Desc: ");
+            foreach (int i in Arr)
+            {
+                Console.Write(i + " ");
+            }
+
+
+            Console.ReadKey();
+        }
+    }
+}

@@ -5,6 +5,10 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binary Search Implementation", "Binary Search Implementation.csproj", "{1B34E993-D4C8-4A9E-A218-6E5BD1A421DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Implementing Bubble Sort", "..\Implementing Bubble Sort\Implementing Bubble Sort.csproj", "{DC5C675F-7884-478D-9EC8-4180B16BF36D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selection Sort", "..\Selection Sort\Selection Sort.csproj", "{F7262D1D-CCF9-4DE2-8744-5E0933F278DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1B34E993-D4C8-4A9E-A218-6E5BD1A421DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B34E993-D4C8-4A9E-A218-6E5BD1A421DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B34E993-D4C8-4A9E-A218-6E5BD1A421DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC5C675F-7884-478D-9EC8-4180B16BF36D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC5C675F-7884-478D-9EC8-4180B16BF36D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC5C675F-7884-478D-9EC8-4180B16BF36D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC5C675F-7884-478D-9EC8-4180B16BF36D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7262D1D-CCF9-4DE2-8744-5E0933F278DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7262D1D-CCF9-4DE2-8744-5E0933F278DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7262D1D-CCF9-4DE2-8744-5E0933F278DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7262D1D-CCF9-4DE2-8744-5E0933F278DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

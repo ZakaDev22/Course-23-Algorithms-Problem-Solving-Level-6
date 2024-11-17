@@ -49,5 +49,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Balanced Tree - AVL Tree\" />
+    <Folder Include="Balanced Trees - Red-Black Tree\" />
+    <Folder Include="Dictionary &amp; Hashset Problems %2820%29\" />
+    <Folder Include="Jagged Array Problems %287%29\" />
+    <Folder Include="Queue &amp; Stack Problems %2830%29\" />
+    <Folder Include="Sorted List Problems %2811%29\" />
+    <Folder Include="Tuples Problems %285%29\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,206 @@
+
+namespace BinarySearchTreeImplementation
+{
+    public class BinarySearchTreeNode<T> where T : IComparable<T>
+    {
+        public T Value { get; set; }
+        public BinarySearchTreeNode<T> Left { get; set; }
+        public BinarySearchTreeNode<T> Right { get; set; }
+
+        public BinarySearchTreeNode(T value)
+        {
+            Value = value;
+            Left = null;
+            Right = null;
+        }
+    }
+
+    public class BinarySearchTree<T> where T : IComparable<T>
+    {
+        public BinarySearchTreeNode<T> Root { get; private set; }
+
+
+        public BinarySearchTree()
+        {
+            Root = null;
+        }
+
+        // The New Inser Method
+        public void Insert(T value)
+        {
+            Root = Insert(Root, value);
+
+        }
+
+        private BinarySearchTreeNode<T> Insert(BinarySearchTreeNode<T> Node, T Value)
+        {
+            if (Node == null)
+                return new BinarySearchTreeNode<T>(Value);
+
+            else if (Value.CompareTo(Node.Value) < 0)
+                Node.Left = Insert(Node.Left, Value);
+
+            else if (Value.CompareTo(Node.Value) > 0)
+                Node.Right = Insert(Node.Right, Value);
+
+            return Node;
+        }
+
+       // Binary Search Tree Method
+        public bool Search(T Value)
+        {
+            return Search(Root, Value) != null;
+        }
+
+        private BinarySearchTreeNode<T> Search(BinarySearchTreeNode<T> Node, T Value)
+        {
+            if (Node == null || Node.Value.Equals(Value))
+                return Node;
+
+            if (Value.CompareTo(Node.Value) < 0)
+                return Search(Node.Left, Value);
+
+            else
+                return Search(Node.Right, Value);
+
+        }
+
+        // Print the tree visually
+        public void PrintTree()
+        {
+            PrintTree(Root, 0);
+        }
+
+        private void PrintTree(BinarySearchTreeNode<T> root, int space)
+        {
+            int COUNT = 10;  // Distance between levels
+            if (root == null)
+                return;
+
+            space += COUNT;
+            PrintTree(root.Right, space);
+
+            Console.WriteLine();
+            for (int i = COUNT; i < space; i++)
+                Console.Write(" ");
+
+            Console.WriteLine(root.Value);
+
+            PrintTree(root.Left, space);
+        }
+
+
+        private void PreOrderTraversal(BinarySearchTreeNode<T> node)
+        {
+            /*
+              PreOrder Traversal visits the current node before its child nodes. 
+              The process for PreOrder Traversal is as follows:
+
+
+                 - Visit the current node.
+                 - Recursively perform PreOrder Traversal of the left subtree.
+                 - Recursively perform PreOrder Traversal of the right subtree.
+            */
+
+            if (node != null)
+            {
+                Console.Write(node.Value + " ");
+                PreOrderTraversal(node.Left);
+                PreOrderTraversal(node.Right);
+            }
+        }
+
+        public void PreOrderTraversal()
+        {
+            PreOrderTraversal(Root);
+            Console.WriteLine();
+        }
+
+        private void PostOrderTraversal(BinarySearchTreeNode<T> node)
+        {
+
+            /*
+              PostOrder Traversal visits the current node after its child nodes. 
+              The process for PostOrder Traversal is:
+
+
+                - Recursively perform PostOrder Traversal of the left subtree.
+                - Recursively perform PostOrder Traversal of the right subtree.
+                - Visit the current node.
+           */
+
+            if (node != null)
+            {
+                PostOrderTraversal(node.Left);
+                PostOrderTraversal(node.Right);
+                Console.Write(node.Value + " ");
+            }
+        }
+
+        public void PostOrderTraversal()
+        {
+            PostOrderTraversal(Root);
+            Console.WriteLine();
+        }
+
+        public void InOrderTraversal()
+        {
+            InOrderTraversal(Root);
+            Console.WriteLine();
+        }
+
+
+        private void InOrderTraversal(BinarySearchTreeNode<T> node)
+        {
+
+            /*
+              Left - Current - Right
+             */
+            if (node != null)
+            {
+                InOrderTraversal(node.Left);
+                Console.Write(node.Value + " ");
+                InOrderTraversal(node.Right);
+            }
+        }
+    }
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var binarySearchTree = new BinarySearchTree<int>();
+            Console.WriteLine("Values to be inserted: 5,3,8,1,4,6,9\n");
+
+            binarySearchTree.Insert(50);
+            binarySearchTree.Insert(40);
+            binarySearchTree.Insert(59);
+            binarySearchTree.Insert(90);
+            binarySearchTree.Insert(30);
+            binarySearchTree.Insert(22);
+            binarySearchTree.Insert(23);
+
+            binarySearchTree.PrintTree();
+
+            Console.WriteLine("\nPreOrder Traversal (Current-Left SubTree - Right SubTree):");
+            binarySearchTree.PreOrderTraversal();
+
+
+            Console.WriteLine("\nPostorder Traversal (Left SubTree - Right SubTree - Current):");
+            binarySearchTree.PostOrderTraversal();
+
+            Console.WriteLine("\nInorder Traversal: Left-Current-Right");
+            binarySearchTree.InOrderTraversal();
+
+            Console.WriteLine("\n\n");
+            Console.WriteLine($"Is Binary Search Tree Contain Number 22 ? : {binarySearchTree.Search(22)}");
+            Console.WriteLine($"Is Binary Search Tree Contain Number 222 ? : {binarySearchTree.Search(222)}");
+
+
+
+            Console.ReadKey();
+
+        }
+    }
+}

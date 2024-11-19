@@ -46,7 +46,9 @@
     <Compile Include="Balanced Tree - AVL Tree\Test.cs" />
     <Compile Include="Balanced Trees - Red-Black Tree\Test.cs" />
     <Compile Include="Binary Search Implementation.cs" />
+    <Compile Include="BitArray Problems %2812%29\test.cs" />
     <Compile Include="Dictionary &amp; Hashset Problems %2820%29\Test.cs" />
+    <Compile Include="Hash Table SortedList SortedSet Problems %2813%29\test.cs" />
     <Compile Include="Jagged Array Problems %287%29\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queue &amp; Stack Problems %2830%29\Test.cs" />

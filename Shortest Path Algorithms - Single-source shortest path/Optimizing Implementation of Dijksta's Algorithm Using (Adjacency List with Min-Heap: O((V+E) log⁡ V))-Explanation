@@ -1,0 +1,49 @@
+
+Optimizing Implementation of Dijksta's Algorithm Using Priority Queue
+
+
+Purpose of the Priority Queue
+The priority queue is used in Dijkstra's algorithm to efficiently retrieve the vertex with the smallest distance at each step. It helps maintain an ordering of vertices based on their shortest distance (priority).
+
+
+
+To improve the time complexity of Dijkstra's algorithm, we can use a priority queue (Min-Heap) to keep track of the vertex with the minimum distance efficiently. Below is the modified implementation of the Dijkstra method that utilizes a priority queue:
+
+Updated Code with Min-Heap for Dijkstra's Algorithm: (  Shortest time to travel Problem - Solution)👈 File 👈👈
+
+Key Changes 👨‍💻👨‍💻:
+
+Priority Queue :
+Implemented using SortedSet for maintaining the minimum distance efficiently.
+Automatically orders vertices based on distance and vertex index.
+
+Distance Update:
+Updated logic ensures the queue is properly managed when distances change.
+
+Improved Time Complexity:
+From O(V2) to O( (V+E) log⁡V), where V is the number of vertices and E is the number of edges.
+This updated version is more efficient and suitable for larger graphs.
+
+
+
+Detailed Comments Summary :
+
+Initialization:
+Creates adjacency matrix and maps vertices to indices.
+Sets up a priority queue (Min-Heap) for efficient distance tracking.
+
+Edge Addition:
+Adds edges with weights in the adjacency matrix.
+Handles both directed and undirected graphs.
+
+Dijkstra's Algorithm:
+Uses the priority queue to efficiently find the vertex with the smallest distance.
+Updates distances for all neighbors, maintaining the shortest path.
+
+Path Reconstruction:
+Tracks predecessors to reconstruct and display the shortest path.
+
+Output:
+Prints the adjacency matrix and shortest paths from the starting vertex.
+This structure ensures both clarity and efficiency in understanding the code's logic and functionality.
+

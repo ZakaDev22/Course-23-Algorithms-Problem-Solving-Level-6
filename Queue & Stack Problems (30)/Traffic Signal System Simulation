@@ -1,0 +1,106 @@
+
+clsMyTrafficSignalSystem trafficSystem = new();
+
+trafficSystem.Add("Car 1");
+trafficSystem.Add("Truck 1");
+trafficSystem.Add("Bike 1");
+trafficSystem.Add("Bus 1");
+
+Console.WriteLine();
+trafficSystem.PrintTrafficSignalSimulation();
+
+public class clsMyTrafficSignalSystem
+{
+    public Queue<string> MyTrafficQueue;
+
+    public clsMyTrafficSignalSystem()
+    {
+        MyTrafficQueue = new Queue<string>();
+    }
+
+    public void Add(string CarName)
+    {
+        if (string.IsNullOrEmpty(CarName))
+        {
+            Console.WriteLine("Empty Data ?");
+            return;
+        }
+        MyTrafficQueue.Enqueue(CarName);
+    }
+
+    public void PrintTrafficSignalSimulation()
+    {
+        if (MyTrafficQueue.Count == 0)
+        {
+            Console.WriteLine("Empty Queue!!");
+            return;
+        }
+
+        Console.WriteLine("\n Traffic Signal Simulation Started... \n");
+
+        while (MyTrafficQueue.Count > 0)
+        {
+            Console.WriteLine($"\n {MyTrafficQueue.Dequeue()} has passed the signal.");
+
+            var temp = new Queue<string>(MyTrafficQueue);
+
+            if (temp.Count > 0)
+            {
+                Console.Write($"Vehicles waiting : ");
+                while (temp.Count > 0)
+                {
+                    Console.Write(temp.Dequeue() + "  --  ");
+                }
+
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine("No vehicles waiting. ");
+            }
+
+        }
+
+        Console.WriteLine("\n Traffic Signal Simulation Ended.");
+    }
+
+}
+
+// Teacher Solution : 
+
+ // Initialize a queue to represent vehicles at the traffic signal
+        Queue<string> trafficQueue = new Queue<string>();
+
+
+        // Add vehicles to the queue
+        trafficQueue.Enqueue("Car 1");
+        trafficQueue.Enqueue("Truck 1");
+        trafficQueue.Enqueue("Bike 1");
+        trafficQueue.Enqueue("Bus 1");
+
+
+        Console.WriteLine("Traffic Signal Simulation Started...\n");
+
+        while (trafficQueue.Count > 0)
+        {
+            // Process the vehicle at the front of the queue
+            string vehicle = trafficQueue.Dequeue();
+            Console.WriteLine($"{vehicle} has passed the signal.\n");
+
+
+            // Display the remaining vehicles
+            if (trafficQueue.Count > 0)
+            {
+                Console.WriteLine("Vehicles waiting: " + string.Join(", ", trafficQueue));
+            }
+            else
+            {
+                Console.WriteLine("No vehicles waiting.");
+            }
+
+
+            Console.WriteLine();
+        }
+
+
+        Console.WriteLine("Traffic Signal Simulation Ended.");

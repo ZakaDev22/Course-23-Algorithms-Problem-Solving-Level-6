@@ -1,0 +1,33 @@
+
+
+using System.Text;
+
+string ConvertToBinaryUsingStack(int value)
+{
+    Stack<int> stack = new();
+
+    while (value > 0)
+    {
+        stack.Push(value % 2);
+        value /= 2;
+    }
+
+    return string.Join("", stack.ToArray());
+}
+
+string ConvertToBinaryUsingStrngBuilder(int value)
+{
+    StringBuilder sb = new();
+
+    while (value > 0)
+    {
+        sb.Insert(0, value % 2);
+        value /= 2;
+    }
+
+    return sb.ToString();
+}
+
+Console.WriteLine($"Convert Number 50 to Binary Using Stack : {ConvertToBinaryUsingStack(50)}");
+Console.WriteLine();
+Console.WriteLine($"Convert Number 50 to Binary Using String Builder : {ConvertToBinaryUsingStrngBuilder(50)}");

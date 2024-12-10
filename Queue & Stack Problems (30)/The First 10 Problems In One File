@@ -1,0 +1,572 @@
+
+
+// # problem 1
+/*Stack<int> stack = new Stack<int>();
+
+stack.Push(0);
+stack.Push(1);
+stack.Push(2);
+stack.Push(3);
+stack.Push(4);
+stack.Push(5);
+
+Console.WriteLine("Printing Stack Element Just Like The Browser Back Button");
+var i = stack.Count;
+while (i > 0)
+{
+    Console.WriteLine("Item : " + stack.Pop());
+    i--;
+}
+
+
+Stack<string> history = new Stack<string>();
+history.Push("Page1");
+history.Push("Page2");
+history.Push("Page3");
+
+Console.WriteLine("Back from: " + history.Pop()); // Output: Back from: Page3
+Console.WriteLine("Current Page: " + history.Peek()); // Output: Current Page: Page2
+Console.ReadKey();*/
+
+
+// # problem 2
+/* using System.Text;
+
+string ConvertToBinaryUsingStack(int value)
+{
+    Stack<int> stack = new();
+
+    while (value > 0)
+    {
+        stack.Push(value % 2);
+        value /= 2;
+    }
+
+    return string.Join("", stack.ToArray());
+}
+
+string ConvertToBinaryUsingStrngBuilder(int value)
+{
+    StringBuilder sb = new();
+
+    while (value > 0)
+    {
+        sb.Insert(0, value % 2);
+        value /= 2;
+    }
+
+    return sb.ToString();
+}
+
+Console.WriteLine($"Convert Number 50 to Binary Using Stack : {ConvertToBinaryUsingStack(50)}");
+Console.WriteLine();
+Console.WriteLine($"Convert Number 50 to Binary Using String Builder : {ConvertToBinaryUsingStrngBuilder(50)}");
+*/
+
+
+// # problem 3
+/*clsMyClaculator calcolator = new();
+
+Console.WriteLine("Test My Calculator Functionality : ");
+Console.WriteLine($"Sum Of Number 22 And 25 Is : {calcolator.Sum(22, 25)}");
+Console.WriteLine($"Mul Of Number 22 And 25 Is : {calcolator.Mul(22, 25)}");
+Console.WriteLine($"Div Of Number 22 And 25 Is : {calcolator.Div(22, 25)}");
+Console.WriteLine($"Sub Of Number 22 And 25 Is : {calcolator.Sub(22, 25)}");
+Console.WriteLine();
+
+Console.WriteLine("Printing All The Previous Results : ");
+calcolator.PrintAllPreviousResult();
+
+Console.WriteLine();
+
+calcolator.HistoryResults.Push(5);
+calcolator.HistoryResults.Push(4);
+calcolator.HistoryResults.Push(2);
+calcolator.HistoryResults.Push(56);
+Console.WriteLine($"Print Current And Previous Result : ");
+calcolator.PrintCurrentAndPreviousResult();
+
+Console.WriteLine();
+
+clsMyClaculator UndoFuture = new();
+Console.WriteLine($"Sum Of Number 5 And 5 Is : {UndoFuture.Sum(5, 5)}");
+Console.WriteLine();
+Console.WriteLine($"Mul Of Number 2 And 3 Is : {UndoFuture.Sum(2, 3)}");
+
+// Now I will Call The Undo Future To Go Back To The previous Result
+Console.WriteLine();
+
+UndoFuture.Undo();
+
+public class clsMyClaculator
+{
+    public Stack<int> HistoryResults;
+    int CurrentResult;
+
+    public clsMyClaculator()
+    {
+        HistoryResults = new();
+        CurrentResult = 0;
+    }
+
+    public int Sum(int value1, int value2)
+    {
+        CurrentResult = (value1 + value2);
+        HistoryResults.Push(CurrentResult);
+
+        return CurrentResult;
+    }
+
+    public int Mul(int value1, int value2)
+    {
+        CurrentResult = (value1 * value2);
+        HistoryResults.Push(CurrentResult);
+
+        return CurrentResult;
+    }
+
+    public int Sub(int value1, int value2)
+    {
+        CurrentResult = (value1 - value2);
+        HistoryResults.Push(CurrentResult);
+
+        return CurrentResult;
+    }
+
+    public int Div(int value1, int value2)
+    {
+        CurrentResult = (value1 / value2);
+        HistoryResults.Push(CurrentResult);
+
+        return CurrentResult;
+    }
+
+    public void Undo()
+    {
+        if (HistoryResults.Count == 0)
+        {
+            Console.WriteLine("Stack Is Empty");
+            return;
+        }
+
+        HistoryResults.Pop();
+
+        CurrentResult = HistoryResults.Peek();
+
+        Console.WriteLine($"Current Result After Undo Future Is : {CurrentResult}");
+    }
+
+    public void PrintCurrentAndPreviousResult()
+    {
+        if (HistoryResults.Count == 0)
+        {
+            Console.WriteLine("Stack Is Empty");
+            return;
+        }
+
+        Console.WriteLine($"Current Result Is : {CurrentResult}");
+
+        Console.WriteLine();
+
+        Console.WriteLine($""""
+                             Using Undo Future To Print My Calculator previous Result 👇
+                             The previous  Result Is :  {HistoryResults.Peek()}
+                           """");
+    }
+    public void PrintAllPreviousResult()
+    {
+        if (HistoryResults.Count == 0)
+        {
+            Console.WriteLine("Stack Is Empty");
+            return;
+        }
+
+        Console.WriteLine();
+
+        while (HistoryResults.Count > 0)
+        {
+            Console.WriteLine(HistoryResults.Pop());
+        }
+    }
+
+
+}
+
+*/
+
+
+// # Problem 4
+/*clsMyJobScheduling TodayScheduling = new();
+
+TodayScheduling.AddScheduling("Do My Prayer");
+TodayScheduling.AddScheduling("Do My Breakfast");
+TodayScheduling.AddScheduling("Study Web Technologies");
+TodayScheduling.AddScheduling("Study Course 23");
+TodayScheduling.AddScheduling("Practice APIs on My School Project");
+
+Console.WriteLine();
+Console.WriteLine($"Print My Current Schedule : {TodayScheduling.CurrentSchedule}");
+Console.WriteLine();
+
+Console.WriteLine();
+Console.WriteLine($"Print All My Schedule For Today ");
+
+TodayScheduling.PrintAllScheduling();
+
+public class clsMyJobScheduling
+{
+    Queue<string> SchedulingQueue;
+
+    public string CurrentSchedule
+    {
+        get
+        {
+            return SchedulingQueue.Count != 0 ? SchedulingQueue.FirstOrDefault() : "Empty Queue";
+        }
+    }
+
+    public clsMyJobScheduling()
+    {
+        SchedulingQueue = new();
+    }
+
+    public void AddScheduling(string scheduling)
+    {
+        if (string.IsNullOrEmpty(scheduling))
+        {
+            Console.WriteLine("Invalid Data");
+            return;
+        }
+
+
+        SchedulingQueue.Enqueue(scheduling);
+    }
+
+    public void PrintAllScheduling()
+    {
+        if (SchedulingQueue.Count == 0)
+        {
+            Console.WriteLine("The Queue is Empty");
+            return;
+        }
+
+
+        Console.WriteLine($"Scheduling For Today : ");
+
+        while (SchedulingQueue.Count > 0)
+        {
+            Console.WriteLine($" {SchedulingQueue.Dequeue()}, ");
+        }
+    }
+    
+}*/
+
+// # problem 5
+/* clsMyTicketingSystemSimulation TicketsSystem = new();
+
+TicketsSystem.Add("Car 1");
+TicketsSystem.Add("Truck 1");
+TicketsSystem.Add("Bike 1");
+TicketsSystem.Add("Bus 1");
+
+Console.WriteLine();
+TicketsSystem.PrintTrafficSignalSimulation();
+
+public class clsMyTicketingSystemSimulation
+{
+    public Queue<string> MyTicketsQueue;
+
+    public clsMyTicketingSystemSimulation()
+    {
+        MyTicketsQueue = new Queue<string>();
+    }
+
+    public void Add(string CarName)
+    {
+        if (string.IsNullOrEmpty(CarName))
+        {
+            Console.WriteLine("Empty Data ?");
+            return;
+        }
+        MyTicketsQueue.Enqueue(CarName);
+    }
+
+    public void PrintTrafficSignalSimulation()
+    {
+        if (MyTicketsQueue.Count == 0)
+        {
+            Console.WriteLine("Empty Queue!!");
+            return;
+        }
+
+        Console.WriteLine("\n Traffic Signal Simulation Started... \n");
+
+        while (MyTicketsQueue.Count > 0)
+        {
+            Console.WriteLine($"\n {MyTicketsQueue.Dequeue()} has passed the signal.");
+
+            var temp = new Queue<string>(MyTicketsQueue);
+
+            if (temp.Count > 0)
+            {
+                Console.Write($"Vehicles waiting : ");
+                while (temp.Count > 0)
+                {
+                    Console.Write(temp.Dequeue() + "  --  ");
+                }
+
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine("No vehicles waiting. ");
+            }
+
+        }
+
+        Console.WriteLine("\n Traffic Signal Simulation Ended.");
+    }
+
+} */
+
+// # problem 6
+
+/* clsMyTicketingSystemSimulation TicketsSystem = new();
+
+TicketsSystem.Add("101");
+TicketsSystem.Add("102");
+TicketsSystem.Add("103");
+TicketsSystem.Add("104");
+TicketsSystem.Add("105");
+
+Console.WriteLine();
+TicketsSystem.PrintTicketsSimulation();
+
+public class clsMyTicketingSystemSimulation
+{
+    public Queue<string> MyTicketsQueue;
+
+    public clsMyTicketingSystemSimulation()
+    {
+        MyTicketsQueue = new Queue<string>();
+    }
+
+    public void Add(string TicketNumber)
+    {
+        if (string.IsNullOrEmpty(TicketNumber))
+        {
+            Console.WriteLine("Empty Data ?");
+            return;
+        }
+        MyTicketsQueue.Enqueue(TicketNumber);
+
+        Console.WriteLine($"Ticket {TicketNumber} issued.");
+    }
+
+    public void PrintTicketsSimulation()
+    {
+        if (MyTicketsQueue.Count == 0)
+        {
+            Console.WriteLine("Empty Queue!!");
+            return;
+        }
+
+        Console.WriteLine("\n Ticketing System Simulation Started.... \n");
+
+        while (MyTicketsQueue.Count > 0)
+        {
+            Console.WriteLine($"\n Processing Ticket : {MyTicketsQueue.Dequeue()}");
+
+
+
+            if (MyTicketsQueue.Count > 0)
+            {
+                Console.WriteLine($"Remaining Tickets : {string.Join(", ", MyTicketsQueue)}");
+            }
+            else
+            {
+                Console.WriteLine("No more tickets in the queue. ");
+            }
+
+        }
+
+        Console.WriteLine("\n Ticketing System Simulation Ended.");
+    }
+
+} */
+
+// # Problem 7 
+/*clsMyImplementingSimpleBacktracking MyBackTracking = new();
+
+MyBackTracking.Add("Go To Gaz");
+MyBackTracking.Add("Go To Super Market");
+MyBackTracking.Add("Go To Work");
+MyBackTracking.Add("Go To Cofe");
+MyBackTracking.Add("Go To Home");
+
+Console.WriteLine();
+
+MyBackTracking.PrintAsQueue();
+
+Console.WriteLine();
+
+MyBackTracking.PrintBackTracking();
+
+public class clsMyImplementingSimpleBacktracking
+{
+    private Queue<string> BackTrackingQueue;
+    private Stack<string> BackTrackingStack;
+
+    public clsMyImplementingSimpleBacktracking()
+    {
+        BackTrackingQueue = new Queue<string>();
+        BackTrackingStack = new Stack<string>();
+
+        BackTrackingQueue.Enqueue("Start");
+        BackTrackingStack.Push("Start");
+    }
+
+    public void Add(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            Console.WriteLine("Empty Data ?");
+        }
+
+        BackTrackingQueue.Enqueue(name);
+        BackTrackingStack.Push(name);
+    }
+
+    public void PrintAsQueue()
+    {
+        Console.WriteLine($"--> {string.Join(" --> ", BackTrackingQueue)}");
+    }
+
+    public void PrintBackTracking()
+    {
+        Console.WriteLine($"\n\n Backtracking...\n");
+
+        while (BackTrackingStack.Count > 0)
+        {
+            Console.WriteLine($"\n Back To : {BackTrackingStack.Pop()}");
+        }
+    }
+} */
+
+// # Problem 8 
+/* clsMyWebPageRequestHandling MyRequests = new();
+
+string[] Tasks = ["Task1", "Task2", "Task3", "Task4"];
+
+MyRequests.AddRequest(Tasks);
+
+Console.WriteLine();
+
+MyRequests.PrintAllRequests();
+
+public class clsMyWebPageRequestHandling
+{
+    Queue<string> RequestQueue;
+
+    public clsMyWebPageRequestHandling()
+    {
+        RequestQueue = new Queue<string>();
+    }
+
+    public void AddRequest(string[] Requests)
+    {
+        for (int i = 0; i < Requests.Length; i++)
+        {
+            RequestQueue.Enqueue(Requests[i]);
+        }
+    }
+
+    public void PrintAllRequests()
+    {
+        Console.WriteLine("Simulate the order of execution Has Started ... ");
+
+        while (RequestQueue.Count > 0)
+        {
+            Console.WriteLine($"processing Task : {RequestQueue.Dequeue()}");
+        }
+    }
+} */
+
+
+// # Problem 9 
+
+/*clsMyCustomerService MyCustomerServices = new();
+
+// Here I use For loop To generate 22 Customer Instead Of Instead Each one Of Theme
+for (int i = 0; i < 22; i++)
+{
+    MyCustomerServices.AddCustomer("C" + i);
+}
+Console.WriteLine("\n\n");
+MyCustomerServices.ServeAndPrintCustomers();
+
+//--------------------------------------------------------------------------------
+public class clsMyCustomerService
+{
+    private Queue<string> _queue;
+
+    public clsMyCustomerService()
+    {
+        _queue = new Queue<string>();
+    }
+
+    public void AddCustomer(string customerId)
+    {
+        _queue.Enqueue(customerId);
+    }
+
+    public void ServeAndPrintCustomers()
+    {
+        Console.WriteLine("\n Customer Service Simulation Started ...");
+
+        while (_queue.Count > 0)
+        {
+            Console.WriteLine($"Customer Number {_queue.Dequeue()} has Ben Served At {DateTime.Now}");
+        }
+    }
+}*/
+
+// # Problem 10
+
+clsMyWebPageRequestHandling MyRequests = new();
+
+string[] Requests = ["Request1", "Request2", "Request3", "Request4"];
+
+MyRequests.AddRequest(Requests);
+
+Console.WriteLine();
+
+MyRequests.PrintAllRequests();
+
+public class clsMyWebPageRequestHandling
+{
+    private Queue<string> RequestQueue;
+
+    public clsMyWebPageRequestHandling()
+    {
+        RequestQueue = new Queue<string>();
+    }
+
+    public void AddRequest(string[] Requests)
+    {
+        for (int i = 0; i < Requests.Length; i++)
+        {
+            RequestQueue.Enqueue(Requests[i]);
+        }
+    }
+
+    public void PrintAllRequests()
+    {
+        Console.WriteLine("Simulate the order of execution Has Started ... ");
+
+        while (RequestQueue.Count > 0)
+        {
+            Console.WriteLine($"processing Request : {RequestQueue.Dequeue()}");
+        }
+    }
+}

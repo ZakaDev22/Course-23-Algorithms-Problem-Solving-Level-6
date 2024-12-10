@@ -1,0 +1,64 @@
+
+clsMyJobScheduling TodayScheduling = new();
+
+TodayScheduling.AddScheduling("Do My Prayer");
+TodayScheduling.AddScheduling("Do My Breakfast");
+TodayScheduling.AddScheduling("Study Web Technologies");
+TodayScheduling.AddScheduling("Study Course 23");
+TodayScheduling.AddScheduling("Practice APIs on My School Project");
+
+Console.WriteLine();
+Console.WriteLine($"Print My Current Schedule : {TodayScheduling.CurrentSchedule}");
+Console.WriteLine();
+
+Console.WriteLine();
+Console.WriteLine($"Print All My Schedule For Today ");
+
+TodayScheduling.PrintAllScheduling();
+
+public class clsMyJobScheduling
+{
+    Queue<string> SchedulingQueue;
+
+    public string CurrentSchedule
+    {
+        get
+        {
+            return SchedulingQueue.Count != 0 ? SchedulingQueue.FirstOrDefault() : "Empty Queue";
+        }
+    }
+
+    public clsMyJobScheduling()
+    {
+        SchedulingQueue = new();
+    }
+
+    public void AddScheduling(string scheduling)
+    {
+        if (string.IsNullOrEmpty(scheduling))
+        {
+            Console.WriteLine("Invalid Data");
+            return;
+        }
+
+
+        SchedulingQueue.Enqueue(scheduling);
+    }
+
+    public void PrintAllScheduling()
+    {
+        if (SchedulingQueue.Count == 0)
+        {
+            Console.WriteLine("The Queue is Empty");
+            return;
+        }
+
+
+        Console.WriteLine($"Scheduling For Today : ");
+
+        while (SchedulingQueue.Count > 0)
+        {
+            Console.WriteLine($" {SchedulingQueue.Dequeue()}, ");
+        }
+    }
+}

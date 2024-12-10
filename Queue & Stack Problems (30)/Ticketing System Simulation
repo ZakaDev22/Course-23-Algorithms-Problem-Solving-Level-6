@@ -1,0 +1,64 @@
+
+
+clsMyTicketingSystemSimulation TicketsSystem = new();
+
+TicketsSystem.Add("101");
+TicketsSystem.Add("102");
+TicketsSystem.Add("103");
+TicketsSystem.Add("104");
+TicketsSystem.Add("105");
+
+Console.WriteLine();
+TicketsSystem.PrintTicketsSimulation();
+
+public class clsMyTicketingSystemSimulation
+{
+    public Queue<string> MyTicketsQueue;
+
+    public clsMyTicketingSystemSimulation()
+    {
+        MyTicketsQueue = new Queue<string>();
+    }
+
+    public void Add(string TicketNumber)
+    {
+        if (string.IsNullOrEmpty(TicketNumber))
+        {
+            Console.WriteLine("Empty Data ?");
+            return;
+        }
+        MyTicketsQueue.Enqueue(TicketNumber);
+
+        Console.WriteLine($"Ticket {TicketNumber} issued.");
+    }
+
+    public void PrintTicketsSimulation()
+    {
+        if (MyTicketsQueue.Count == 0)
+        {
+            Console.WriteLine("Empty Queue!!");
+            return;
+        }
+
+        Console.WriteLine("\n Ticketing System Simulation Started.... \n");
+
+        while (MyTicketsQueue.Count > 0)
+        {
+            Console.WriteLine($"\n Processing Ticket : {MyTicketsQueue.Dequeue()}");
+
+
+
+            if (MyTicketsQueue.Count > 0)
+            {
+                Console.WriteLine($"Remaining Tickets : {string.Join(", ", MyTicketsQueue)}");
+            }
+            else
+            {
+                Console.WriteLine("No more tickets in the queue. ");
+            }
+
+        }
+
+        Console.WriteLine("\n Ticketing System Simulation Ended.");
+    }
+

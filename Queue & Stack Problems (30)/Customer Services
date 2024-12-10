@@ -1,0 +1,37 @@
+
+
+clsMyCustomerService MyCustomerServices = new();
+
+// Here I use For loop To generate 22 Customer Instead Of Instead Each one Of Theme
+for (int i = 0; i < 22; i++)
+{
+    MyCustomerServices.AddCustomer("C" + i);
+}
+Console.WriteLine("\n\n");
+MyCustomerServices.ServeAndPrintCustomers();
+
+//--------------------------------------------------------------------------------
+public class clsMyCustomerService
+{
+    private Queue<string> _queue;
+
+    public clsMyCustomerService()
+    {
+        _queue = new Queue<string>();
+    }
+
+    public void AddCustomer(string customerId)
+    {
+        _queue.Enqueue(customerId);
+    }
+
+    public void ServeAndPrintCustomers()
+    {
+        Console.WriteLine("\n Customer Service Simulation Started ...");
+
+        while (_queue.Count > 0)
+        {
+            Console.WriteLine($"Customer Number {_queue.Dequeue()} has Ben Served At {DateTime.Now}");
+        }
+    }
+}

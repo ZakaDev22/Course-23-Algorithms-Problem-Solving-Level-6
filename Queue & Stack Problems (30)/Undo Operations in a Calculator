@@ -1,0 +1,130 @@
+
+
+clsMyClaculator calcolator = new();
+
+Console.WriteLine("Test My Calculator Functionality : ");
+Console.WriteLine($"Sum Of Number 22 And 25 Is : {calcolator.Sum(22, 25)}");
+Console.WriteLine($"Mul Of Number 22 And 25 Is : {calcolator.Mul(22, 25)}");
+Console.WriteLine($"Div Of Number 22 And 25 Is : {calcolator.Div(22, 25)}");
+Console.WriteLine($"Sub Of Number 22 And 25 Is : {calcolator.Sub(22, 25)}");
+Console.WriteLine();
+
+Console.WriteLine("Printing All The Previous Results : ");
+calcolator.PrintAllPreviousResult();
+
+Console.WriteLine();
+
+calcolator.HistoryResults.Push(5);
+calcolator.HistoryResults.Push(4);
+calcolator.HistoryResults.Push(2);
+calcolator.HistoryResults.Push(56);
+Console.WriteLine($"Print Current And Previous Result : ");
+calcolator.PrintCurrentAndPreviousResult();
+
+Console.WriteLine();
+
+clsMyClaculator UndoFuture = new();
+Console.WriteLine($"Sum Of Number 5 And 5 Is : {UndoFuture.Sum(5, 5)}");
+Console.WriteLine();
+Console.WriteLine($"Mul Of Number 2 And 3 Is : {UndoFuture.Sum(2, 3)}");
+
+// Now I will Call The Undo Future To Go Back To The previous Result
+Console.WriteLine();
+
+UndoFuture.Undo();
+
+public class clsMyClaculator
+{
+    public Stack<int> HistoryResults;
+    int CurrentResult;
+
+    public clsMyClaculator()
+    {
+        HistoryResults = new();
+        CurrentResult = 0;
+    }
+
+    public int Sum(int value1, int value2)
+    {
+        CurrentResult = (value1 + value2);
+        HistoryResults.Push(CurrentResult);
+
+        return CurrentResult;
+    }
+
+    public int Mul(int value1, int value2)
+    {
+        CurrentResult = (value1 * value2);
+        HistoryResults.Push(CurrentResult);
+
+        return CurrentResult;
+    }
+
+    public int Sub(int value1, int value2)
+    {
+        CurrentResult = (value1 - value2);
+        HistoryResults.Push(CurrentResult);
+
+        return CurrentResult;
+    }
+
+    public int Div(int value1, int value2)
+    {
+        CurrentResult = (value1 / value2);
+        HistoryResults.Push(CurrentResult);
+
+        return CurrentResult;
+    }
+
+    public void Undo()
+    {
+        if (HistoryResults.Count == 0)
+        {
+            Console.WriteLine("Stack Is Empty");
+            return;
+        }
+
+        HistoryResults.Pop();
+
+        CurrentResult = HistoryResults.Peek();
+
+        Console.WriteLine($"Current Result After Undo Future Is : {CurrentResult}");
+    }
+
+    public void PrintCurrentAndPreviousResult()
+    {
+        if (HistoryResults.Count == 0)
+        {
+            Console.WriteLine("Stack Is Empty");
+            return;
+        }
+
+        Console.WriteLine($"Current Result Is : {CurrentResult}");
+
+        Console.WriteLine();
+
+        Console.WriteLine($""""
+                             Using Undo Future To Print My Calculator previous Result 👇
+                             The previous  Result Is :  {HistoryResults.Peek()}
+                           """");
+    }
+    public void PrintAllPreviousResult()
+    {
+        if (HistoryResults.Count == 0)
+        {
+            Console.WriteLine("Stack Is Empty");
+            return;
+        }
+
+        Console.WriteLine();
+
+        while (HistoryResults.Count > 0)
+        {
+            Console.WriteLine(HistoryResults.Pop());
+        }
+    }
+
+
+}
+
+

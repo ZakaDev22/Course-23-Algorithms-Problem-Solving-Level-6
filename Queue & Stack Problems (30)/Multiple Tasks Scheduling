@@ -1,0 +1,40 @@
+
+clsMyMultTaskScheduling MyTasks = new();
+
+string[] Tasks = ["Task1", "Task2", "Task3", "Task4"];
+
+MyTasks.AddTasks(Tasks);
+
+Console.WriteLine();
+
+MyTasks.PrintAllTasks();
+
+//---------------------------------------------------
+
+public class clsMyMultTaskScheduling
+{
+    Queue<string> TaskQueue;
+
+    public clsMyMultTaskScheduling()
+    {
+        TaskQueue = new Queue<string>();
+    }
+
+    public void AddTasks(string[] tasks)
+    {
+        for (int i = 0; i < tasks.Length; i++)
+        {
+            TaskQueue.Enqueue(tasks[i]);
+        }
+    }
+
+    public void PrintAllTasks()
+    {
+        Console.WriteLine("Simulate the order of execution Has Started ... ");
+
+        while (TaskQueue.Count > 0)
+        {
+            Console.WriteLine($"processing Task : {TaskQueue.Dequeue()}");
+        }
+    }
+}

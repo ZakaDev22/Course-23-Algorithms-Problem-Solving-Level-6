@@ -1,0 +1,58 @@
+
+
+clsMyImplementingSimpleBacktracking MyBackTracking = new();
+
+MyBackTracking.Add("Go To Gaz");
+MyBackTracking.Add("Go To Super Market");
+MyBackTracking.Add("Go To Work");
+MyBackTracking.Add("Go To Cofe");
+MyBackTracking.Add("Go To Home");
+
+Console.WriteLine();
+
+MyBackTracking.PrintAsQueue();
+
+Console.WriteLine();
+
+MyBackTracking.PrintBackTracking();
+
+public class clsMyImplementingSimpleBacktracking
+{
+    private Queue<string> BackTrackingQueue;
+    private Stack<string> BackTrackingStack;
+
+    public clsMyImplementingSimpleBacktracking()
+    {
+        BackTrackingQueue = new Queue<string>();
+        BackTrackingStack = new Stack<string>();
+
+        BackTrackingQueue.Enqueue("Start");
+        BackTrackingStack.Push("Start");
+    }
+
+    public void Add(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            Console.WriteLine("Empty Data ?");
+        }
+
+        BackTrackingQueue.Enqueue(name);
+        BackTrackingStack.Push(name);
+    }
+
+    public void PrintAsQueue()
+    {
+        Console.WriteLine($"--> {string.Join(" --> ", BackTrackingQueue)}");
+    }
+
+    public void PrintBackTracking()
+    {
+        Console.WriteLine($"\n\n Backtracking...\n");
+
+        while (BackTrackingStack.Count > 0)
+        {
+            Console.WriteLine($"\n Back To : {BackTrackingStack.Pop()}");
+        }
+    }
+}

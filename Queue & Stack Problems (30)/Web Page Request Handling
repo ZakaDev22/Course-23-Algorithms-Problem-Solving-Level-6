@@ -1,0 +1,39 @@
+
+clsMyWebPageRequestHandling MyRequests = new();
+
+string[] Requests = ["Request1", "Request2", "Request3", "Request4"];
+
+MyRequests.AddRequest(Requests);
+
+Console.WriteLine();
+
+MyRequests.PrintAllRequests();
+
+// ------------------------------------------------------
+public class clsMyWebPageRequestHandling
+{
+    private Queue<string> RequestQueue;
+
+    public clsMyWebPageRequestHandling()
+    {
+        RequestQueue = new Queue<string>();
+    }
+
+    public void AddRequest(string[] Requests)
+    {
+        for (int i = 0; i < Requests.Length; i++)
+        {
+            RequestQueue.Enqueue(Requests[i]);
+        }
+    }
+
+    public void PrintAllRequests()
+    {
+        Console.WriteLine("Simulate the order of execution Has Started ... ");
+
+        while (RequestQueue.Count > 0)
+        {
+            Console.WriteLine($"processing Request : {RequestQueue.Dequeue()}");
+        }
+    }
+}

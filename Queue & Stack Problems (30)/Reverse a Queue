@@ -1,0 +1,68 @@
+
+// My First Solution
+int[] numbers = { 1, 2, 3, 4, 5 };
+Queue<int> Numbers = new Queue<int>(numbers);
+
+var ReversedNumbers = new Queue<int>(Numbers.Reverse());
+
+Console.WriteLine("\n\n Normal Numbers :");
+while (Numbers.Count > 0)
+{
+    Console.WriteLine($" Number : {Numbers.Dequeue()}");
+}
+
+Console.WriteLine("\n\n Reversed Numbers :");
+while (ReversedNumbers.Count > 0)
+{
+    Console.WriteLine($" Number : {ReversedNumbers.Dequeue()}");
+}
+
+// Solutions Using Queue And Stack 
+
+int[] numbers2 = { 1, 2, 3, 4, 5 };
+Queue<int> Numbers2 = new Queue<int>(numbers2);
+
+Console.WriteLine("\n\n Normal Numbers 2 :");
+for (int i = 0; i < numbers2.Length; i++)
+{
+    Console.WriteLine($" Number : {numbers2[i]}");
+}
+
+Stack<int> StackNumbers = new Stack<int>();
+
+while (Numbers2.Count > 0)
+{
+    StackNumbers.Push(Numbers2.Dequeue());
+}
+
+Console.WriteLine("\n\n Printing Reversed Elements Using Stack :");
+
+while (StackNumbers.Count > 0)
+{
+    Console.WriteLine($" Number : {StackNumbers.Pop()}");
+}
+
+// Teacher Solution : 
+
+static Queue<int> ReverseQueue(Queue<int> queue)
+{
+    Stack<int> stack = new Stack<int>();
+    while (queue.Count > 0)
+    {
+        stack.Push(queue.Dequeue());
+    }
+    while (stack.Count > 0)
+    {
+        queue.Enqueue(stack.Pop());
+    }
+    return queue;
+}
+
+
+static void Main()
+{
+    Queue<int> queue = new Queue<int>(new[] { 1, 2, 3, 4, 5 });
+    Queue<int> reversedQueue = ReverseQueue(queue);
+    Console.WriteLine(string.Join(", ", reversedQueue)); // Output: 5, 4, 3, 2, 1
+    Console.ReadKey();
+}

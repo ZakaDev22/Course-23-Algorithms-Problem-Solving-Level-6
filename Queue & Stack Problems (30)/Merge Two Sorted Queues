@@ -1,5 +1,3 @@
-
-
 Queue<int> queue1 = new([1, 3, 5]), queue2 = new([2, 4, 6]);
 
 Queue<int> MergedQueue = new Queue<int>();
@@ -33,7 +31,7 @@ Console.WriteLine($"The Original Queue After I Insert Two Queues And Merge Theme
 //-----------------------------------------------------------------------
 // Teacher Solution : 
 
-// This Solution Will Work Only If The Two Queue Are Equal
+// This Solution Will Work Only If The Two Queues Count Are Equal
 // But In this Case : 👇👇👇
 // Queue<int> q1 = new Queue<int>(new[] { 1, 3, 5, 33, 22, 77 });
 // Queue<int> q2 = new Queue<int>(new[] { 2, 4, 6, 666, 345, 888, 98, 231, 334 });
@@ -44,6 +42,10 @@ Console.WriteLine($"The Original Queue After I Insert Two Queues And Merge Theme
 //If The Count Of Each Queue Become 0 And The Other Queue is Not Then The Other While Loops Will Only Insert The Remain Elements
 
 //We Have To Use Linq Method To .OrderBy(x => x) Like I did In My Solution
+
+//MergedQueue = new(MergedQueue.OrderBy(x => x).ToList());
+
+//then we can return The Queue Without Any Issue ✅
 
 static Queue<int> MergeQueues(Queue<int> q1, Queue<int> q2)
 {

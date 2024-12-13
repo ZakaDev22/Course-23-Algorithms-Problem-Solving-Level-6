@@ -1,0 +1,90 @@
+
+
+
+Queue<int> numbers = new([1, 2, 3, 4, 5, 6,]);
+
+Console.WriteLine($"Normal Numbers : {string.Join(", ", numbers)}");
+
+
+static Queue<int> MyInterleaveQueue(Queue<int> numbers)
+{
+
+
+    Queue<int> FirstHalf = new(), SecondHalf = new();
+
+    int QueueTotalNumbers = numbers.Count;
+    int queueHalfNumber = numbers.Count / 2;
+
+    // here i will Fill The First And SecondHalf Stack
+    for (int i = 0; i < QueueTotalNumbers; i++)
+    {
+        if (i < queueHalfNumber)
+        {
+            FirstHalf.Enqueue(numbers.Dequeue());
+        }
+        else
+        {
+            SecondHalf.Enqueue(numbers.Dequeue());
+        }
+    }
+
+    // here i will Insert In The Original Queue From Both Halfs In the same Time One Element Each Time So 2 * (queueHalfNumber = 3)  == 6 Elements
+    while (queueHalfNumber > 0)
+    {
+        numbers.Enqueue(FirstHalf.Dequeue());
+        numbers.Enqueue(SecondHalf.Dequeue());
+
+        // here i sub the queue half count by 1 So the Wile Loop We Break If The The First ANd Half Queue Is Empty
+        queueHalfNumber -= 1;
+    }
+
+    return numbers;
+}
+
+// Send The Current Queue The Method That Will Interleave it
+MyInterleaveQueue(numbers);
+
+Console.WriteLine($""""
+
+                   Interleave the first half of a queue with the second half.
+
+                   Result = {string.Join(", ", numbers)}
+
+                   """");
+
+// Teacher Solotion : 
+
+Queue<int> queue = new Queue<int>(new[] { 1, 2, 3, 4, 5, 6 });
+InterleaveQueue(queue);
+Console.WriteLine(string.Join(", ", queue)); // Output: 1, 4, 2, 5, 3, 6
+
+static void InterleaveQueue(Queue<int> queue)
+{
+    int halfSize = queue.Count / 2;
+    Stack<int> stack = new Stack<int>();
+    for (int i = 0; i < halfSize; i++)
+    {
+        stack.Push(queue.Dequeue());
+    }
+
+    while (stack.Count > 0)
+    {
+        queue.Enqueue(stack.Pop());
+    }
+
+    for (int i = 0; i < halfSize; i++) 
+    {
+        queue.Enqueue(queue.Dequeue());
+    }
+
+    for (int i = 0; i < halfSize; i++)
+    {
+        stack.Push(queue.Dequeue());
+    }
+
+    while (stack.Count > 0)
+    {
+        queue.Enqueue(stack.Pop());
+        queue.Enqueue(queue.Dequeue());
+    }
+}

@@ -1,0 +1,59 @@
+
+static Queue<int> ReverseQueue(Queue<int> queue)
+{
+    Stack<int> stack = new();
+    while (queue.Count > 0)
+    {
+        stack.Push(queue.Dequeue());
+    }
+    while (stack.Count > 0)
+    {
+        queue.Enqueue(stack.Pop());
+    }
+    return queue;
+}
+
+int[] numbers = { 1, 2, 3, 2, 1 };
+Queue<int> Queue1 = new Queue<int>(numbers);
+
+static bool IsQueueHavePalandromNumbers(Queue<int> Queue1)
+{
+    var tempQueue = new Queue<int>(Queue1);
+
+    var Queue2 = ReverseQueue(tempQueue);
+
+    while (Queue1.Count > 0)
+    {
+        if (Queue1.Dequeue() != Queue2.Dequeue())
+            return false;
+    }
+
+
+    return true;
+
+}
+
+static string QueueResult(bool result)
+{
+    return result == true ? "Yes" : "No";
+}
+
+Console.WriteLine($""""
+
+                   Is Queue 1 Equal To Queue 2 : {QueueResult(IsQueueHavePalandromNumbers(Queue1))}
+
+                   """");
+
+// Teacher Palindrom Method :
+
+static bool IsPalindrome(Queue<int> queue)
+{
+    Stack<int> stack = new Stack<int>(queue);
+    foreach (var item in queue)
+    {
+        if (stack.Pop() != item)
+            return false;
+    }
+    return true;
+}
+

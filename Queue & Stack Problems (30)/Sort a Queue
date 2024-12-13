@@ -1,0 +1,29 @@
+
+Queue<int> queue = new Queue<int>([5, 1, 3, 2, 4]);
+
+var queueWithAscendingOrder = queue.OrderBy(x => x);
+
+var queueWithDescendingOrder = queue.OrderByDescending(x => x);
+//-----------------------------------------------------------------------------
+
+Console.WriteLine($"Queue Elements With Input Order : {string.Join(", ", queue)}"); // 5 1 3 2 4
+
+Console.WriteLine($"Queue Elements With ascending Order : {string.Join(", ", queueWithAscendingOrder)}"); // 1 2 3 4 5
+
+Console.WriteLine($"Queue Elements With Descending Order : {string.Join(", ", queueWithDescendingOrder)}"); // 5 4 3 2 1
+
+
+//===========================
+
+// Teacher Sort Method : 
+
+static Queue<int> SortQueue(Queue<int> queue)
+{
+    //this will generate a list from a queue
+    List<int> list = new List<int>(queue);
+    list.Sort();
+
+
+    // this will generate a queue from list
+    return new Queue<int>(list);
+}

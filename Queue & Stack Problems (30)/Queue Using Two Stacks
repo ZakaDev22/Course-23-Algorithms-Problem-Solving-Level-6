@@ -1,0 +1,105 @@
+
+
+// solution 1 : easy one
+
+Stack<int> QueueUsingStacks1 = new([1, 2, 3, 4, 5]);
+
+Stack<int> QueueUsingStacks2 = new(QueueUsingStacks1);
+
+Console.WriteLine($""""
+
+                    Queue Using Stack 1 : {string.Join(", ", QueueUsingStacks1)}
+                   
+                   """");
+
+Console.WriteLine($""""
+
+                    Queue Using Stack 2 :  {string.Join(", ", QueueUsingStacks2)}
+                  
+                   """");
+
+// solution 2 : Using Class Methods
+
+MyQueue MyQueue = new MyQueue();
+
+MyQueue.Enqueue(1);
+MyQueue.Enqueue(2);
+MyQueue.Enqueue(3);
+MyQueue.Enqueue(4);
+
+Console.WriteLine($""""
+                     Result :   {string.Join(", ", QueueUsingStacks1)}
+                  """");
+
+Console.WriteLine($"\n Dequeue Number 1 : {MyQueue.Dequeue()}");
+Console.WriteLine($"\n Dequeue Number 2 : {MyQueue.Dequeue()}");
+Console.WriteLine($"\n Dequeue Number 3 : {MyQueue.Dequeue()}");
+
+Console.WriteLine($"\n\n My Peek Method : {MyQueue.Peek()}");
+
+public class MyQueue
+{
+    private Stack<int> _Stack1, _stack2;
+
+    public MyQueue()
+    {
+        _Stack1 = new();
+        _stack2 = new();
+    }
+
+    public void Enqueue(int value)
+    {
+        _Stack1.Push(value);
+
+        _stack2 = new(_Stack1);
+    }
+    public int Dequeue()
+    {
+        return _stack2.Pop();
+    }
+
+    public int Peek()
+    {
+        return _stack2.Peek();
+    }
+
+
+    public bool IsEmpty()
+    {
+        return _stack2.Count == 0;
+    }
+}
+
+// Teacher Solution : 
+
+
+class TeacherQueue
+{
+    private Stack<int> stack1 = new Stack<int>();
+    private Stack<int> stack2 = new Stack<int>();
+
+
+    public void Enqueue(int x)
+    {
+        stack1.Push(x);
+    }
+
+
+    public int Dequeue()
+    {
+        if (stack2.Count == 0)
+        {
+            while (stack1.Count > 0)
+            {
+                stack2.Push(stack1.Pop());
+            }
+        }
+        return stack2.Pop();
+    }
+
+
+    public bool IsEmpty()
+    {
+        return stack1.Count == 0 && stack2.Count == 0;
+    }
+}

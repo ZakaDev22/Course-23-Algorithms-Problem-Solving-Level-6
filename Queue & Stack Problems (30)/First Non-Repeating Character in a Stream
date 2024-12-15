@@ -1,0 +1,92 @@
+
+// My Teacher Solution : With Some Bugs 
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void FindFirstNonRepeating(string stream)
+    {
+        Dictionary<char, int> countMap = new Dictionary<char, int>();
+        Queue<char> queue = new Queue<char>();
+
+
+        foreach (char ch in stream)
+        {
+            if (!countMap.ContainsKey(ch))
+                countMap[ch] = 0;
+
+
+            countMap[ch]++;
+            queue.Enqueue(ch);
+
+
+            while (queue.Count > 0 && countMap[queue.Peek()] > 1)
+            {
+                queue.Dequeue();
+            }
+
+
+            Console.WriteLine(queue.Count > 0 ? queue.Peek() : '-');
+        }
+    }
+
+    static void Main()
+    {
+        FindFirstNonRepeating("aabc");
+        // Output: a, -, b, c
+        Console.ReadKey();
+    }
+}
+
+
+
+// My Solution After I fix My Teacher Solution : 
+
+Console.WriteLine("\n\n");
+
+MyFindFirstNonRepeating("aabcccddss");
+
+// result : a       -       b       c       -       -       d       -       s       -
+
+Console.WriteLine("\n\n");
+
+static void MyFindFirstNonRepeating(string stream)
+{
+    Dictionary<char, int> countMap = new Dictionary<char, int>();
+    Queue<char> queue = new Queue<char>();
+
+    List<char> keyList;
+
+    foreach (char ch in stream)
+    {
+        if (!countMap.ContainsKey(ch))
+            countMap[ch] = 0;
+
+
+        countMap[ch]++;
+        queue.Enqueue(ch);
+
+        // here i create a list so that i can track the dictionary keys each time and retrive the key
+        keyList = new List<char>(countMap.Keys.ToList());
+
+        while (queue.Count > 0 && countMap[queue.Peek()] > 1)
+        {
+            // here i check if the the last key in the list is equal to the peek of the queue so that it mean that the element is already exists
+            // then i have to remove it and clear the queue for the next element
+            while (keyList.LastOrDefault() == queue.Peek())
+            {
+                queue.Dequeue();
+
+                if (queue.Count == 0)
+                    break;
+            }
+        }
+
+
+        // here i change the peek to dequeue so that is no need to clear the queue another time for the next element
+        Console.Write(queue.Count > 0 ? queue.Dequeue() : '-');
+        Console.Write("\t");
+    }
+}

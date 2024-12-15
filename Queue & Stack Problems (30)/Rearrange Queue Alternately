@@ -1,0 +1,73 @@
+
+
+Queue<int> queue = new([1, 2, 3, 10, 4, 5, 15, 6]);
+
+Console.WriteLine($"\n\n Normal Queue Before : {string.Join(", ", queue)}");
+
+queue = MyRearrangeQueueAlternately(queue);
+//queue = RearrangeAlternately(queue);
+
+Console.WriteLine($"\n\n Normal Queue After : {string.Join(", ", queue)}");
+
+
+static Queue<int> MyRearrangeQueueAlternately(Queue<int> queue)
+{
+    if (queue.Count == 0) return queue;
+
+    Queue<int> FirstHalf = new Queue<int>();
+    Stack<int> SecondHalf = new Stack<int>();
+    int HalfCount = queue.Count / 2;
+
+    // Sort The Queue By ASC In Case The Data Is Miss
+    queue = new Queue<int>(queue.OrderBy(x => x));
+
+    // fill The All The Elements In The First Half In a Temp Queue
+    while (queue.Count > HalfCount)
+    {
+        FirstHalf.Enqueue(queue.Dequeue());
+    }
+
+    // fill The All The Elements In The Second Half In a Temp Stack
+    while (queue.Count > 0)
+    {
+        SecondHalf.Push(queue.Dequeue());
+    }
+
+    // Fill The Original Queue With Both Temps Queue And Stack One Element Each Time 
+    while (FirstHalf.Count > 0 || SecondHalf.Count > 0)
+    {
+        if (FirstHalf.Count > 0)
+            queue.Enqueue(FirstHalf.Dequeue());
+
+        if (SecondHalf.Count > 0)
+            queue.Enqueue(SecondHalf.Pop());
+    }
+
+
+    return queue;
+}
+
+// My Teacher Method : 
+
+static Queue<int> RearrangeAlternately(Queue<int> queue)
+{
+    List<int> list = new List<int>(queue.Order());
+    int n = list.Count;
+    Queue<int> result = new Queue<int>();
+
+
+    for (int i = 0; i < n / 2; i++)
+    {
+        result.Enqueue(list[i]);
+        result.Enqueue(list[n - i - 1]);
+    }
+
+
+    if (n % 2 != 0)
+    {
+        result.Enqueue(list[n / 2]);
+    }
+
+
+    return result;
+}

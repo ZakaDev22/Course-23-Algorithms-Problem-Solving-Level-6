@@ -1,0 +1,85 @@
+
+clsMyPriorityQueue MyPriorityQueue = new();
+
+MyPriorityQueue.Enqueue(10, 1);
+MyPriorityQueue.Enqueue(5, 3);
+MyPriorityQueue.Enqueue(20, 2);
+
+Console.WriteLine($"\n\n {MyPriorityQueue.Dequeue()} (highest priority first)");
+Console.WriteLine($"\n\n {MyPriorityQueue.Dequeue()} (highest priority first)");
+Console.WriteLine($"\n\n {MyPriorityQueue.Dequeue()} (highest priority first)");
+
+// Teacher result
+PriorityQueue pq = new PriorityQueue();
+pq.Enqueue(10, 3);
+pq.Enqueue(5, 1);
+pq.Enqueue(20, 2);
+
+Console.WriteLine("\n\n Teacher Result : " + pq.Dequeue());
+
+class clsMyPriorityQueue
+{
+    private SortedList<int, int> MyPriorityQueue;
+
+    public clsMyPriorityQueue()
+    {
+        MyPriorityQueue = new SortedList<int, int>();
+    }
+
+
+    public void Enqueue(int key, int value)
+    {
+        MyPriorityQueue.Add(key, value);
+    }
+
+    public int Dequeue()
+    {
+        if (MyPriorityQueue.Count == 0)
+            return 0;
+
+
+        int highestpriority = 0;
+
+        highestpriority = MyPriorityQueue.First(x => x.Value == MyPriorityQueue.Values.Max()).Key;
+
+        MyPriorityQueue.Remove(highestpriority);
+
+        return highestpriority;
+
+    }
+
+
+}
+
+// Teacher Solution :
+
+
+class PriorityQueue
+{
+    private SortedDictionary<int, Queue<int>> queue = new SortedDictionary<int, Queue<int>>();
+
+
+    public void Enqueue(int value, int priority)
+    {
+        if (!queue.ContainsKey(priority))
+        {
+            queue[priority] = new Queue<int>();
+        }
+        queue[priority].Enqueue(value);
+    }
+
+
+    public int? Dequeue()
+    {
+        if (queue.Count == 0) return null;
+
+
+        int highestPriority = queue.Keys.Min();
+        int value = queue[highestPriority].Dequeue();
+        if (queue[highestPriority].Count == 0)
+        {
+            queue.Remove(highestPriority);
+        }
+        return value;
+    }
+}

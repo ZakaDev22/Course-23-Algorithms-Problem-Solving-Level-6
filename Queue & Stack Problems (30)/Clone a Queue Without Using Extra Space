@@ -1,0 +1,83 @@
+
+
+Queue<int> Original = new([1, 2, 3, 4]);
+
+int OriginalCount = Original.Count, SecondOriginalCount = Original.Count;
+
+Stack<int> CloneQueue = new();
+
+var clone = MyCloneQueue(Original, CloneQueue, OriginalCount, SecondOriginalCount); // <<<----------------
+
+
+Console.WriteLine($"\n\n Original Queue After : {string.Join(", ", Original)}");
+
+
+Console.WriteLine($"\n\n Clone Queue After : {string.Join(", ", clone)}");
+
+static Queue<int> MyCloneQueue(Queue<int> original, Stack<int> CloneStack, int OriginalCount, int SecondOriginalCount)
+{
+
+    while (OriginalCount != 0)
+    {
+        if (OriginalCount > 0 && CloneStack.Count == SecondOriginalCount && original.Count == SecondOriginalCount)
+            break;
+
+        CloneStack.Push(original.Dequeue());
+
+        original.Enqueue(CloneStack.Peek());
+
+        OriginalCount -= 1;
+
+        MyCloneQueue(original, CloneStack, OriginalCount, SecondOriginalCount);
+    }
+
+
+
+    return new Queue<int>(CloneStack.Reverse());
+}
+
+// Teacher Solution After I Update it To Give The Right Result Of 1 2 3 4 And Not  4 3 2 1 : 
+
+Console.WriteLine("\n Teacher Solution : ");
+
+Queue<int> queue = new Queue<int>(new[] { 1, 2, 3, 4 });
+int TeacherQueueCount = queue.Count;
+
+Queue<int> clonedQueue = TeacherCloneQueue(ref queue, TeacherQueueCount);
+
+Console.WriteLine(string.Join(", ", clonedQueue)); // Output: 1, 2, 3, 4
+Console.WriteLine(string.Join(", ", queue)); // Output: 1, 2, 3, 4
+
+static Queue<int> TeacherCloneQueue(ref Queue<int> queue, int originalCount)
+{
+    if (queue.Count == 0) return new Queue<int>();
+
+
+    int front = queue.Dequeue();
+    Queue<int> clone = TeacherCloneQueue(ref queue, originalCount);
+    queue.Enqueue(front);
+    clone.Enqueue(front);
+
+    // Reverse The Queues Results From 4,3,2,1 to 1,2,3,4
+    if (queue.Count == originalCount && clone.Count == originalCount)
+    {
+        queue = new(queue.Reverse());
+        clone = new(clone.Reverse());
+    }
+
+    return clone;
+}
+
+// Teacher Solution Befor I Update it : 
+
+static Queue<int> FirstCloneQueue(Queue<int> queue)
+{
+    if (queue.Count == 0) return new Queue<int>();
+
+
+    int front = queue.Dequeue();
+    Queue<int> clone = FirstCloneQueue(queue);
+    queue.Enqueue(front);
+    clone.Enqueue(front);
+    return clone;
+}

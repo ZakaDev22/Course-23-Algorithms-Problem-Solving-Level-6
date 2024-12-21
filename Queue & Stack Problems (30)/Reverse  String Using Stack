@@ -1,0 +1,56 @@
+
+
+using System.Text;
+
+string ss = "Hello";
+
+string NewString = ReversStringCharacters(ss);
+
+Console.WriteLine($"String Befor {ss} , String After : {NewString}");
+
+static string ReversStringCharacters(string s)
+{
+    if (string.IsNullOrEmpty(s))
+        return s;
+
+    StringBuilder NewString = new();
+
+    Stack<char> Stack = new();
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        Stack.Push(s[i]);
+    }
+
+    while (Stack.Count > 0)
+    {
+        NewString.Append(Stack.Pop());
+    }
+
+    return NewString.ToString();
+}
+
+//Teacher Method :
+
+static string Reverse(string input)
+{
+    Stack<char> stack = new Stack<char>();
+
+
+    // Push each character onto the stack
+    foreach (char c in input)
+    {
+        stack.Push(c);
+    }
+
+
+    // Pop characters to form the reversed string
+    string reversed = "";
+    while (stack.Count > 0)
+    {
+        reversed += stack.Pop();
+    }
+
+
+    return reversed;
+}

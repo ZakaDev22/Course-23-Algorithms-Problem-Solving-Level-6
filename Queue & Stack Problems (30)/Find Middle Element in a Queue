@@ -1,0 +1,24 @@
+
+
+Queue<int> queue = new([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+
+int middleElement = FindMiddleElementinaQueue(queue);
+
+Console.WriteLine($"\n\n Middle Element In Queeu : {string.Join(", ", queue)} is : {middleElement}");
+
+static int FindMiddleElementinaQueue(Queue<int> queue)
+{
+    List<int> list = new List<int>(queue);
+
+    int middleElement = list[(list.Count - 1) / 2];
+
+    return middleElement;
+}
+
+// teacher Method : 
+
+static int FindMiddle(Queue<int> queue)
+{
+    List<int> list = new List<int>(queue);
+    return list[list.Count / 2];
+}

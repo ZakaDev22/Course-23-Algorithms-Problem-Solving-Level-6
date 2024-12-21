@@ -1,0 +1,77 @@
+
+
+Queue<int> MyQueue = new([1, 2, 3, 4, 5, 6]);
+
+Console.WriteLine($"\n\n My Queue Before : {string.Join(", ", MyQueue)}");
+
+MyQueue = MyRearrangeEvenandOddElements(MyQueue);
+
+Console.WriteLine($"\n\n My Queue After : {string.Join(", ", MyQueue)}");
+
+static Queue<int> MyRearrangeEvenandOddElements(Queue<int> queue)
+{
+    if (queue.Count == 0) return queue;
+
+    Queue<int> EvenNumbersHalf = new(), OddNumbersHalf = new();
+
+    while (queue.Count > 0)
+    {
+        if (queue.Peek() % 2 == 0)
+        {
+            EvenNumbersHalf.Enqueue(queue.Dequeue());
+        }
+        else
+        {
+            OddNumbersHalf.Enqueue(queue.Dequeue());
+        }
+    }
+
+
+    while (EvenNumbersHalf.Count > 0)
+    {
+        queue.Enqueue(EvenNumbersHalf.Dequeue());
+    }
+
+    while (OddNumbersHalf.Count > 0)
+    {
+        queue.Enqueue(OddNumbersHalf.Dequeue());
+    }
+
+    return queue;
+}
+
+// Teacher Method loke The Same As My Method :
+
+static Queue<int> RearrangeEvenOdd(Queue<int> queue)
+{
+    Queue<int> evenQueue = new Queue<int>();
+    Queue<int> oddQueue = new Queue<int>();
+
+
+    while (queue.Count > 0)
+    {
+        int num = queue.Dequeue();
+        if (num % 2 == 0)
+        {
+            evenQueue.Enqueue(num);
+        }
+        else
+        {
+            oddQueue.Enqueue(num);
+        }
+    }
+
+
+    while (evenQueue.Count > 0)
+    {
+        queue.Enqueue(evenQueue.Dequeue());
+    }
+
+
+    while (oddQueue.Count > 0)
+    {
+        queue.Enqueue(oddQueue.Dequeue());
+    }
+
+    return queue;
+}

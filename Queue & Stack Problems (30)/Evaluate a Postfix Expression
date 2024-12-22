@@ -1,0 +1,86 @@
+
+
+string input = "231*+9-";
+var result = MyEvaluateAPostfixExpression(input);
+
+Console.WriteLine($"\n\n The Final Result = {result}");
+
+static int MyEvaluateAPostfixExpression(string input)
+{
+    Stack<int> stack = new();
+    int num1 = 0, num2 = 0;
+    int result = 0;
+
+
+    foreach (var c in input)
+    {
+        if (char.IsDigit(c))
+        {
+            stack.Push(c - '0');
+        }
+        else if (stack.Count > 1)
+        {
+            num1 = stack.Pop();
+            num2 = stack.Pop();
+
+            switch (c)
+            {
+                case '+':
+                    {
+                        stack.Push((num2 + num1));
+                        break;
+                    }
+                case '*':
+                    {
+                        stack.Push((num2 * num1));
+                        break;
+                    }
+                case '-':
+                    {
+                        stack.Push((num2 - num1));
+                        break;
+                    }
+                case '/':
+                    {
+                        stack.Push((num2 / num1));
+                        break;
+                    }
+            }
+        }
+    }
+
+    if (stack.Count == 1)
+        result = stack.Pop();
+
+    return result;
+}
+
+// Teacher Method : 
+
+static int EvaluatePostfix(string expression)
+{
+    Stack<int> stack = new Stack<int>();
+
+
+    foreach (char c in expression)
+    {
+        if (char.IsDigit(c))
+        {
+            stack.Push(c - '0');
+        }
+        else
+        {
+            int b = stack.Pop();
+            int a = stack.Pop();
+            switch (c)
+            {
+                case '+': stack.Push(a + b); break;
+                case '-': stack.Push(a - b); break;
+                case '*': stack.Push(a * b); break;
+                case '/': stack.Push(a / b); break;
+            }
+        }
+    }
+
+    return stack.Pop();
+}

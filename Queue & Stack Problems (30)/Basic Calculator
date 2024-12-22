@@ -1,0 +1,104 @@
+
+Problem: Evaluate a mathematical expression containing +, -, (, ) without * or /.
+
+Example:
+Input: "1 + (2 - 3)"
+Output: 0
+
+
+Key Points:
+
+Use a stack to handle parentheses and maintain the current sum.
+
+// My Solution : 
+string input = "1 + (2 - 3)";
+
+var result = EvaluateAMathematicalExpression(input);
+
+Console.WriteLine($"\n\n Result = {result}");
+
+static int EvaluateAMathematicalExpression(string input)
+{
+    Stack<int> OutSideNumbers = new();
+    Queue<int> InSideNumbers = new();
+    char OutsideOperation = ' ', InsideOperation = ' ';
+    bool isInsideBraket = false;
+
+    foreach (char c in input)
+    {
+        if (char.IsWhiteSpace(c))
+            continue;
+
+        if (c != '(' && !isInsideBraket)
+        {
+            if (char.IsDigit(c))
+                OutSideNumbers.Push(c - '0');
+            else
+                OutsideOperation = c;
+        }
+        else if (c == '(')
+        {
+            isInsideBraket = true;
+            continue;
+        }
+        else if (c != ')')
+        {
+            if (char.IsDigit(c))
+                InSideNumbers.Enqueue(c - '0');
+            else
+                InsideOperation = c;
+        }
+    }
+
+    var result = InsideOperation == '-' ? InSideNumbers.Dequeue() - InSideNumbers.Dequeue() : 0;
+
+    result = OutsideOperation == '+' ? OutSideNumbers.Pop() + result : 0;
+
+    return result;
+}
+
+// Teacher Solution :
+
+static int Calculate(string s)
+{
+    Stack<int> stack = new Stack<int>();
+    int result = 0, sign = 1, number = 0;
+
+
+    foreach (char c in s)
+    {
+        if (char.IsDigit(c))
+        {
+            number = number * 10 + (c - '0');
+        }
+        else if (c == '+')
+        {
+            result += sign * number;
+            number = 0;
+            sign = 1;
+        }
+        else if (c == '-')
+        {
+            result += sign * number;
+            number = 0;
+            sign = -1;
+        }
+        else if (c == '(')
+        {
+            stack.Push(result);
+            stack.Push(sign);
+            result = 0;
+            sign = 1;
+        }
+        else if (c == ')')
+        {
+            result += sign * number;
+            number = 0;
+            result *= stack.Pop();
+            result += stack.Pop();
+        }
+    }
+
+    result += sign * number;
+    return result;
+}

@@ -1,0 +1,66 @@
+
+
+using System.Text;
+
+string zz = "Hello";
+string ss = "madam";
+
+Console.WriteLine($"\n\n Is String  {ss} palindrome ? : {IsPalindromeString(zz)}");
+
+Console.WriteLine($"\n\n Is String  {ss} palindrome ? : {IsPalindromeString(ss)}");
+
+static bool IsPalindromeString(string s)
+{
+    string NewString = ReversStringCharacters(s);
+
+    return s.Equals(NewString);
+}
+
+static string ReversStringCharacters(string s)
+{
+    if (string.IsNullOrEmpty(s))
+        return s;
+
+    StringBuilder NewString = new();
+
+    Stack<char> Stack = new();
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        Stack.Push(s[i]);
+    }
+
+    while (Stack.Count > 0)
+    {
+        NewString.Append(Stack.Pop());
+    }
+
+    return NewString.ToString();
+}
+
+// Teacher Solution :
+
+static bool IsPalindrome(string input)
+{
+    Stack<char> stack = new Stack<char>();
+
+
+    // Push each character of the string onto the stack
+    foreach (char c in input)
+    {
+        stack.Push(c);
+    }
+
+
+    // Check if the string reads the same forward and backward
+    foreach (char c in input)
+    {
+        if (stack.Pop() != c)
+        {
+            return false; // If any character doesn't match, it's not a palindrome
+        }
+    }
+
+
+    return true;
+}

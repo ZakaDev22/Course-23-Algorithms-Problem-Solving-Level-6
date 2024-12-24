@@ -1,0 +1,96 @@
+
+using System.Text;
+
+string s = "(()))";
+
+var result = MyRemoveInvalidParentheses(s);
+
+Console.WriteLine($"\n\n My Result = {result}");
+
+var result2 = RemoveInvalidParentheses(s);
+
+Console.WriteLine($"\n\n Teacher Result = {result2}");
+
+
+static string MyRemoveInvalidParentheses(string s)
+{
+    Stack<char> RightBracket = new();
+    Stack<char> LeftBracket = new();
+    StringBuilder sb = new StringBuilder();
+
+    foreach (char c in s)
+    {
+        if (c == '(')
+        {
+            RightBracket.Push(c);
+        }
+        else if (c == ')' && LeftBracket.Count < RightBracket.Count)
+        {
+            LeftBracket.Push(c);
+        }
+    }
+
+    int RightBracketCount = RightBracket.Count;
+
+    while (RightBracket.Count > 0)
+    {
+        sb.Append(RightBracket.Pop());
+    }
+
+    while (RightBracketCount > 0)
+    {
+        sb.Append(LeftBracket.Pop());
+        RightBracketCount--;
+    }
+
+    return sb.ToString();
+}
+
+// Teacher Solution : 
+
+static string RemoveInvalidParentheses(string s)
+{
+    Stack<int> stack = new Stack<int>();
+    HashSet<int> invalidIndices = new HashSet<int>();
+
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        if (s[i] == '(')
+        {
+            stack.Push(i);
+        }
+        else if (s[i] == ')')
+        {
+            if (stack.Count == 0)
+            {
+                invalidIndices.Add(i);
+            }
+            else
+            {
+                stack.Pop();
+            }
+        }
+    }
+
+
+    while (stack.Count > 0)
+    {
+        invalidIndices.Add(stack.Pop());
+    }
+
+
+    char[] result = new char[s.Length - invalidIndices.Count];
+    int index = 0;
+    for (int i = 0; i < s.Length; i++)
+    {
+        if (!invalidIndices.Contains(i))
+        {
+            result[index++] = s[i];
+        }
+    }
+
+
+    return new string(result);
+}
+

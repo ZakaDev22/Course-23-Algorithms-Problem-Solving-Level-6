@@ -1,0 +1,815 @@
+
+// # Problem 21
+
+/* clsMyPriorityQueue MyPriorityQueue = new();
+
+MyPriorityQueue.Enqueue(10, 1);
+MyPriorityQueue.Enqueue(5, 3);
+MyPriorityQueue.Enqueue(20, 2);
+
+Console.WriteLine($"\n\n {MyPriorityQueue.Dequeue()} (highest priority first)");
+Console.WriteLine($"\n\n {MyPriorityQueue.Dequeue()} (highest priority first)");
+Console.WriteLine($"\n\n {MyPriorityQueue.Dequeue()} (highest priority first)");
+
+// Teacher result
+PriorityQueue pq = new PriorityQueue();
+pq.Enqueue(10, 3);
+pq.Enqueue(5, 1);
+pq.Enqueue(20, 2);
+
+Console.WriteLine("\n\n Teacher Result : " + pq.Dequeue());
+
+class clsMyPriorityQueue
+{
+    private SortedList<int, int> MyPriorityQueue;
+
+    public clsMyPriorityQueue()
+    {
+        MyPriorityQueue = new SortedList<int, int>();
+    }
+
+
+    public void Enqueue(int key, int value)
+    {
+        MyPriorityQueue.Add(key, value);
+    }
+
+    public int Dequeue()
+    {
+        if (MyPriorityQueue.Count == 0)
+            return 0;
+
+
+        int highestpriority = 0;
+
+        highestpriority = MyPriorityQueue.First(x => x.Value == MyPriorityQueue.Values.Max()).Key;
+
+        MyPriorityQueue.Remove(highestpriority);
+
+        return highestpriority;
+
+    }
+
+
+}
+
+// Teacher Solution :
+
+
+class PriorityQueue
+{
+    private SortedDictionary<int, Queue<int>> queue = new SortedDictionary<int, Queue<int>>();
+
+
+    public void Enqueue(int value, int priority)
+    {
+        if (!queue.ContainsKey(priority))
+        {
+            queue[priority] = new Queue<int>();
+        }
+        queue[priority].Enqueue(value);
+    }
+
+
+    public int? Dequeue()
+    {
+        if (queue.Count == 0) return null;
+
+
+        int highestPriority = queue.Keys.Min();
+        int value = queue[highestPriority].Dequeue();
+        if (queue[highestPriority].Count == 0)
+        {
+            queue.Remove(highestPriority);
+        }
+        return value;
+    }
+}
+
+*/
+
+// # Problem 22
+
+/* Queue<int> MyQueue = new([1, 2, 3, 4, 5, 6]);
+
+Console.WriteLine($"\n\n My Queue Before : {string.Join(", ", MyQueue)}");
+
+MyQueue = MyRearrangeEvenandOddElements(MyQueue);
+
+Console.WriteLine($"\n\n My Queue After : {string.Join(", ", MyQueue)}");
+
+static Queue<int> MyRearrangeEvenandOddElements(Queue<int> queue)
+{
+    if (queue.Count == 0) return queue;
+
+    Queue<int> EvenNumbersHalf = new(), OddNumbersHalf = new();
+
+    while (queue.Count > 0)
+    {
+        if (queue.Peek() % 2 == 0)
+        {
+            EvenNumbersHalf.Enqueue(queue.Dequeue());
+        }
+        else
+        {
+            OddNumbersHalf.Enqueue(queue.Dequeue());
+        }
+    }
+
+
+    while (EvenNumbersHalf.Count > 0)
+    {
+        queue.Enqueue(EvenNumbersHalf.Dequeue());
+    }
+
+    while (OddNumbersHalf.Count > 0)
+    {
+        queue.Enqueue(OddNumbersHalf.Dequeue());
+    }
+
+    return queue;
+}
+
+// Teacher Method loke The Same As My Method :
+
+static Queue<int> RearrangeEvenOdd(Queue<int> queue)
+{
+    Queue<int> evenQueue = new Queue<int>();
+    Queue<int> oddQueue = new Queue<int>();
+
+
+    while (queue.Count > 0)
+    {
+        int num = queue.Dequeue();
+        if (num % 2 == 0)
+        {
+            evenQueue.Enqueue(num);
+        }
+        else
+        {
+            oddQueue.Enqueue(num);
+        }
+    }
+
+
+    while (evenQueue.Count > 0)
+    {
+        queue.Enqueue(evenQueue.Dequeue());
+    }
+
+
+    while (oddQueue.Count > 0)
+    {
+        queue.Enqueue(oddQueue.Dequeue());
+    }
+
+    return queue;
+}
+
+*/
+
+// # Problem 23
+
+/* Queue<int> Original = new([1, 2, 3, 4]);
+
+int OriginalCount = Original.Count, SecondOriginalCount = Original.Count;
+
+Stack<int> CloneQueue = new();
+
+var clone = MyCloneQueue(Original, CloneQueue, OriginalCount, SecondOriginalCount); // <<<----------------
+
+
+Console.WriteLine($"\n\n Original Queue After : {string.Join(", ", Original)}");
+
+
+Console.WriteLine($"\n\n Clone Queue After : {string.Join(", ", clone)}");
+
+static Queue<int> MyCloneQueue(Queue<int> original, Stack<int> CloneStack, int OriginalCount, int SecondOriginalCount)
+{
+
+    while (OriginalCount != 0)
+    {
+        if (OriginalCount > 0 && CloneStack.Count == SecondOriginalCount && original.Count == SecondOriginalCount)
+            break;
+
+        CloneStack.Push(original.Dequeue());
+
+        original.Enqueue(CloneStack.Peek());
+
+        OriginalCount -= 1;
+
+        MyCloneQueue(original, CloneStack, OriginalCount, SecondOriginalCount);
+    }
+
+
+
+    return new Queue<int>(CloneStack.Reverse());
+}
+
+// Teacher Solution After I Update it To Give The Right Result Of 1 2 3 4 And Not  4 3 2 1 : 
+
+Console.WriteLine("\n Teacher Solution : ");
+
+Queue<int> queue = new Queue<int>(new[] { 1, 2, 3, 4 });
+int TeacherQueueCount = queue.Count;
+
+Queue<int> clonedQueue = TeacherCloneQueue(ref queue, TeacherQueueCount);
+
+Console.WriteLine(string.Join(", ", clonedQueue)); // Output: 1, 2, 3, 4
+Console.WriteLine(string.Join(", ", queue)); // Output: 1, 2, 3, 4
+
+static Queue<int> TeacherCloneQueue(ref Queue<int> queue, int originalCount)
+{
+    if (queue.Count == 0) return new Queue<int>();
+
+
+    int front = queue.Dequeue();
+    Queue<int> clone = TeacherCloneQueue(ref queue, originalCount);
+    queue.Enqueue(front);
+    clone.Enqueue(front);
+
+    // Reverse The Queues Results From 4,3,2,1 to 1,2,3,4
+    if (queue.Count == originalCount && clone.Count == originalCount)
+    {
+        queue = new(queue.Reverse());
+        clone = new(clone.Reverse());
+    }
+
+    return clone;
+}
+
+// Teacher Solution Befor I Update it : 
+
+static Queue<int> FirstCloneQueue(Queue<int> queue)
+{
+    if (queue.Count == 0) return new Queue<int>();
+
+
+    int front = queue.Dequeue();
+    Queue<int> clone = FirstCloneQueue(queue);
+    queue.Enqueue(front);
+    clone.Enqueue(front);
+    return clone;
+}
+
+*/
+
+// # Problem 24
+
+/* Queue<int> queue = new([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+
+int middleElement = FindMiddleElementinaQueue(queue);
+
+Console.WriteLine($"\n\n Middle Element In Queeu : {string.Join(", ", queue)} is : {middleElement}");
+
+static int FindMiddleElementinaQueue(Queue<int> queue)
+{
+    List<int> list = new List<int>(queue);
+
+    int middleElement = list[(list.Count - 1) / 2];
+
+    return middleElement;
+}
+
+// teacher Method : 
+
+static int FindMiddle(Queue<int> queue)
+{
+    List<int> list = new List<int>(queue);
+    return list[list.Count / 2];
+}
+*/
+
+// # Problem 25
+
+/* using System.Text;
+
+string ss = "Hello";
+
+string NewString = ReversStringCharacters(ss);
+
+Console.WriteLine($"String Befor {ss} , String After : {NewString}");
+
+static string ReversStringCharacters(string s)
+{
+    if (string.IsNullOrEmpty(s))
+        return s;
+
+    StringBuilder NewString = new();
+
+    Stack<char> Stack = new();
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        Stack.Push(s[i]);
+    }
+
+    while (Stack.Count > 0)
+    {
+        NewString.Append(Stack.Pop());
+    }
+
+    return NewString.ToString();
+}
+
+//Teacher Method :
+
+static string Reverse(string input)
+{
+    Stack<char> RightBracket = new Stack<char>();
+
+
+    // Push each character onto the RightBracket
+    foreach (char c in input)
+    {
+        RightBracket.Push(c);
+    }
+
+
+    // Pop characters to form the reversed string
+    string reversed = "";
+    while (RightBracket.Count > 0)
+    {
+        reversed += RightBracket.Pop();
+    }
+
+
+    return reversed;
+}
+*/
+
+// # Problem 26
+
+/* string Parentheses = "({[]})";
+
+Console.WriteLine($"\n\n True Parentheses Result Is :  {IsBalancedParentheses(Parentheses)}");
+
+
+string FalseParentheses = "({[)]}";
+
+Console.WriteLine($"\n\n False Parentheses Result Is :  {IsBalancedParentheses(FalseParentheses)}");
+
+
+static (Stack<char> firstHalf, Queue<char> secondHalf) BreakTheStringToTwoHalfes(string s)
+{
+    Stack<char> firstHalf = new();
+    Queue<char> secondHalf = new();
+
+    int HalfCount = s.Length / 2;
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        if (i < HalfCount)
+        {
+            firstHalf.Push(s[i]);
+        }
+        else
+        {
+            secondHalf.Enqueue(s[i]);
+        }
+    }
+
+    return (firstHalf, secondHalf);
+}
+
+static bool IsBalancedParentheses(string Parentheses)
+{
+
+    var charTupel = BreakTheStringToTwoHalfes(Parentheses);
+
+    Stack<char> firstHalf = charTupel.firstHalf;
+    Queue<char> secondHalf = charTupel.secondHalf;
+
+    int rightBrackets = 0;
+
+    for (int i = 0; i < Parentheses.Length / 2; i++)
+    {
+        char character = firstHalf.Pop();
+
+        switch (character)
+        {
+            case '(':
+                {
+                    rightBrackets = 41; // ')'
+
+                    if ((char)rightBrackets != secondHalf.Dequeue())
+                    {
+                        return false;
+                    }
+
+                    break;
+                }
+
+            case '{':
+                {
+                    rightBrackets = 125; // '}'
+
+                    if ((char)rightBrackets != secondHalf.Dequeue())
+                    {
+                        return false;
+                    }
+
+                    break;
+                }
+
+            case '[':
+                {
+                    rightBrackets = 93; // ']'
+
+                    if ((char)rightBrackets != secondHalf.Dequeue())
+                    {
+                        return false;
+                    }
+
+                    break;
+                }
+        }
+    }
+
+    return true;
+}
+
+// Teacher Method : 
+
+static bool IsBalanced(string input)
+{
+    Stack<char> RightBracket = new Stack<char>();
+
+
+    foreach (char c in input)
+    {
+        if (c == '(' || c == '{' || c == '[')
+        {
+            RightBracket.Push(c); // Push opening brackets
+        }
+        else if (c == ')' || c == '}' || c == ']')
+        {
+            if (RightBracket.Count == 0)
+                return false; // No matching opening bracket
+
+
+            char top = RightBracket.Pop();
+
+
+            if ((c == ')' && top != '(') ||
+                (c == '}' && top != '{') ||
+                (c == ']' && top != '['))
+            {
+                return false; // Mismatched brackets
+            }
+        }
+    }
+
+
+    return RightBracket.Count == 0; // Stack should be empty if balanced
+}
+*/
+
+// # Problem 27
+
+/* using System.Text;
+
+string zz = "Hello";
+string ss = "madam";
+
+Console.WriteLine($"\n\n Is String  {ss} palindrome ? : {IsPalindromeString(zz)}");
+
+Console.WriteLine($"\n\n Is String  {ss} palindrome ? : {IsPalindromeString(ss)}");
+
+static bool IsPalindromeString(string s)
+{
+    string NewString = ReversStringCharacters(s);
+
+    return s.Equals(NewString);
+}
+
+static string ReversStringCharacters(string s)
+{
+    if (string.IsNullOrEmpty(s))
+        return s;
+
+    StringBuilder NewString = new();
+
+    Stack<char> Stack = new();
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        Stack.Push(s[i]);
+    }
+
+    while (Stack.Count > 0)
+    {
+        NewString.Append(Stack.Pop());
+    }
+
+    return NewString.ToString();
+}
+
+// Teacher Solution :
+
+static bool IsPalindrome(string input)
+{
+    Stack<char> RightBracket = new Stack<char>();
+
+
+    // Push each character of the string onto the RightBracket
+    foreach (char c in input)
+    {
+        RightBracket.Push(c);
+    }
+
+
+    // Check if the string reads the same forward and backward
+    foreach (char c in input)
+    {
+        if (RightBracket.Pop() != c)
+        {
+            return false; // If any character doesn't match, it's not a palindrome
+        }
+    }
+
+
+    return true;
+}
+*/
+
+// # problem 28 
+
+/*string input = "231*+9-";
+var result = MyEvaluateAPostfixExpression(input);
+
+Console.WriteLine($"\n\n The Final Result = {result}");
+
+static int MyEvaluateAPostfixExpression(string input)
+{
+    Stack<int> RightBracket = new();
+    int num1 = 0, num2 = 0;
+    int result = 0;
+
+
+    foreach (var c in input)
+    {
+        if (char.IsDigit(c))
+        {
+            RightBracket.Push(c - '0');
+        }
+        else if (RightBracket.Count > 1)
+        {
+            num1 = RightBracket.Pop();
+            num2 = RightBracket.Pop();
+
+            switch (c)
+            {
+                case '+':
+                    {
+                        RightBracket.Push((num2 + num1));
+                        break;
+                    }
+                case '*':
+                    {
+                        RightBracket.Push((num2 * num1));
+                        break;
+                    }
+                case '-':
+                    {
+                        RightBracket.Push((num2 - num1));
+                        break;
+                    }
+                case '/':
+                    {
+                        RightBracket.Push((num2 / num1));
+                        break;
+                    }
+            }
+        }
+    }
+
+    if (RightBracket.Count == 1)
+        result = RightBracket.Pop();
+
+    return result;
+}
+
+// Teacher Method : 
+
+static int EvaluatePostfix(string expression)
+{
+    Stack<int> RightBracket = new Stack<int>();
+
+
+    foreach (char c in expression)
+    {
+        if (char.IsDigit(c))
+        {
+            RightBracket.Push(c - '0');
+        }
+        else
+        {
+            int b = RightBracket.Pop();
+            int a = RightBracket.Pop();
+            switch (c)
+            {
+                case '+': RightBracket.Push(a + b); break;
+                case '-': RightBracket.Push(a - b); break;
+                case '*': RightBracket.Push(a * b); break;
+                case '/': RightBracket.Push(a / b); break;
+            }
+        }
+    }
+
+    return RightBracket.Pop();
+}
+*/
+
+// # problem 29
+
+/*string input = "1 + (2 - 3)";
+
+var result = EvaluateAMathematicalExpression(input);
+
+Console.WriteLine($"\n\n Result = {result}");
+
+static int EvaluateAMathematicalExpression(string input)
+{
+    Stack<int> OutSideNumbers = new();
+    Queue<int> InSideNumbers = new();
+    char OutsideOperation = ' ', InsideOperation = ' ';
+    bool isInsideBraket = false;
+
+    foreach (char c in input)
+    {
+        if (char.IsWhiteSpace(c))
+            continue;
+
+        if (c != '(' && !isInsideBraket)
+        {
+            if (char.IsDigit(c))
+                OutSideNumbers.Push(c - '0');
+            else
+                OutsideOperation = c;
+        }
+        else if (c == '(')
+        {
+            isInsideBraket = true;
+            continue;
+        }
+        else if (c != ')')
+        {
+            if (char.IsDigit(c))
+                InSideNumbers.Enqueue(c - '0');
+            else
+                InsideOperation = c;
+        }
+    }
+
+    var result = InsideOperation == '-' ? InSideNumbers.Dequeue() - InSideNumbers.Dequeue() : 0;
+
+    result = OutsideOperation == '+' ? OutSideNumbers.Pop() + result : 0;
+
+    return result;
+}
+
+// Teacher Solution :
+
+static int Calculate(string s)
+{
+    Stack<int> RightBracket = new Stack<int>();
+    int result = 0, sign = 1, number = 0;
+
+
+    foreach (char c in s)
+    {
+        if (char.IsDigit(c))
+        {
+            number = number * 10 + (c - '0');
+        }
+        else if (c == '+')
+        {
+            result += sign * number;
+            number = 0;
+            sign = 1;
+        }
+        else if (c == '-')
+        {
+            result += sign * number;
+            number = 0;
+            sign = -1;
+        }
+        else if (c == '(')
+        {
+            RightBracket.Push(result);
+            RightBracket.Push(sign);
+            result = 0;
+            sign = 1;
+        }
+        else if (c == ')')
+        {
+            result += sign * number;
+            number = 0;
+            result *= RightBracket.Pop();
+            result += RightBracket.Pop();
+        }
+    }
+
+    result += sign * number;
+    return result;
+}
+*/
+
+// # Problem 30
+
+using System.Text;
+
+string s = "(()))";
+
+var result = MyRemoveInvalidParentheses(s);
+
+Console.WriteLine($"\n\n My Result = {result}");
+
+var result2 = RemoveInvalidParentheses(s);
+
+Console.WriteLine($"\n\n Teacher Result = {result2}");
+
+
+static string MyRemoveInvalidParentheses(string s)
+{
+    Stack<char> RightBracket = new();
+    Stack<char> LeftBracket = new();
+    StringBuilder sb = new StringBuilder();
+
+    foreach (char c in s)
+    {
+        if (c == '(')
+        {
+            RightBracket.Push(c);
+        }
+        else if (c == ')' && LeftBracket.Count < RightBracket.Count)
+        {
+            LeftBracket.Push(c);
+        }
+    }
+
+    int RightBracketCount = RightBracket.Count;
+
+    while (RightBracket.Count > 0)
+    {
+        sb.Append(RightBracket.Pop());
+    }
+
+    while (RightBracketCount > 0)
+    {
+        sb.Append(LeftBracket.Pop());
+        RightBracketCount--;
+    }
+
+    return sb.ToString();
+}
+
+// Teacher Solution : 
+
+static string RemoveInvalidParentheses(string s)
+{
+    Stack<int> stack = new Stack<int>();
+    HashSet<int> invalidIndices = new HashSet<int>();
+
+
+    for (int i = 0; i < s.Length; i++)
+    {
+        if (s[i] == '(')
+        {
+            stack.Push(i);
+        }
+        else if (s[i] == ')')
+        {
+            if (stack.Count == 0)
+            {
+                invalidIndices.Add(i);
+            }
+            else
+            {
+                stack.Pop();
+            }
+        }
+    }
+
+
+    while (stack.Count > 0)
+    {
+        invalidIndices.Add(stack.Pop());
+    }
+
+
+    char[] result = new char[s.Length - invalidIndices.Count];
+    int index = 0;
+    for (int i = 0; i < s.Length; i++)
+    {
+        if (!invalidIndices.Contains(i))
+        {
+            result[index++] = s[i];
+        }
+    }
+
+
+    return new string(result);
+}
+

@@ -1,0 +1,33 @@
+
+HashSet<int> TopGrades = new HashSet<int>()
+{
+    100,99,98,97,96,95,94,93,92,91,90
+};
+
+var Grade = 101;
+
+while (Grade >= 80)
+{
+    if (!TopGrades.Add(Grade))
+    {
+        Console.WriteLine($"\nGrade : {Grade} Already Exist?");
+    }
+
+    Grade--;
+}
+
+Console.WriteLine($"\n\nFinal Grades : {string.Join(", ", TopGrades.OrderByDescending(x => x))}");
+
+// Teacher Solution : 
+
+HashSet<string> dataEntries = new HashSet<string>();
+
+string[] entries = { "A", "B", "C", "A" }; // A is a duplicate
+foreach (var entry in entries)
+{
+    if (!dataEntries.Add(entry))
+    {
+        Console.WriteLine($"Duplicate detected: {entry}");
+    }
+}
+

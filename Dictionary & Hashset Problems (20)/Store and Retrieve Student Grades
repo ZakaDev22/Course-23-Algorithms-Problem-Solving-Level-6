@@ -1,0 +1,23 @@
+
+Dictionary<string, double> Studnets = new()
+{
+    {"Bob", 90 },
+    {"zaka", 100 },
+    {"ss", 99.9 },
+    {"zz", 95 }
+};
+
+string Name = "Bob";
+var StudentGrade = RetriveStudentGrade(Name, Studnets);
+
+Console.WriteLine($"\n\n Student Grade With Name : {Name}, Is : {StudentGrade}");
+
+static double RetriveStudentGrade(string Name, Dictionary<string, double> Studnets)
+{
+    if (Studnets.ContainsKey(Name))
+    {
+        return Studnets[Name];
+    }
+
+    return -1;
+}

@@ -1,0 +1,28 @@
+
+
+HashSet<string> jobRequirements = new(["C#", "SQL", "JavaScript"]);
+
+string[] candidateSkills = { "C#", "JavaScript", "React" };
+
+List<string> MatchingSkills = new();
+
+for (int i = 0; i < jobRequirements.Count; i++)
+{
+    if (jobRequirements.Contains(candidateSkills[i]))
+    {
+        MatchingSkills.Add(candidateSkills[i]);
+    }
+}
+
+Console.WriteLine($"\n\n  Matching Skills: {string.Join(", ", MatchingSkills)}");
+
+// Teacher Solution :
+
+HashSet<string> candidateSkills2 = new HashSet<string> { "C#", "SQL", "JavaScript" };
+HashSet<string> jobRequirements2 = new HashSet<string> { "C#", "JavaScript", "React" };
+
+
+candidateSkills2.IntersectWith(jobRequirements2);
+
+
+Console.WriteLine("\n\n Matching Skills: " + string.Join(", ", candidateSkills2));

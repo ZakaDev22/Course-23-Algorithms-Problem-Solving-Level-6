@@ -1,0 +1,38 @@
+
+Dictionary<char, int> CharFrequency = new Dictionary<char, int>();
+
+string Input = "hello";
+
+
+foreach (char c in Input)
+{
+    if (CharFrequency.ContainsKey(c))
+        CharFrequency[c]++;
+    else
+        CharFrequency[c] = 1;
+}
+
+Console.Write("\n\n Output : ");
+foreach (var Item in CharFrequency)
+{
+    Console.Write($"{Item.Key}: {Item.Value},  ");
+}
+
+// Teacher Method : 
+
+static Dictionary<char, int> CharacterFrequency(string input)
+{
+    Dictionary<char, int> frequency = new Dictionary<char, int>();
+
+
+    foreach (char c in input)
+    {
+        if (frequency.ContainsKey(c))
+            frequency[c]++;
+        else
+            frequency[c] = 1;
+    }
+
+
+    return frequency;
+}

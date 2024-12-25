@@ -1,0 +1,20 @@
+
+Dictionary<string, string> Words = new()
+{
+    {"hello", "Hola" },
+    {"Goodbye", "Adiós" }
+};
+
+Console.WriteLine($"\n\n Hello In Spanish : {TranslateWords("hello", Words)}");
+
+Console.WriteLine($"\n\n Goodbye In Spanish : {TranslateWords("Goodbye", Words)}");
+
+string TranslateWords(string Word, Dictionary<string, string> Words)
+{
+    if (Words.ContainsKey(Word))
+    {
+        return Words[Word];
+    }
+
+    return string.Empty;
+}

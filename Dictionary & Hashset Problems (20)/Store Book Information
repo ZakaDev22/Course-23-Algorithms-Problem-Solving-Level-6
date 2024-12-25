@@ -1,0 +1,25 @@
+
+Dictionary<string, Tuple<string, string>> Books = new()
+{
+    {"978-3-16-148410-0", new Tuple<string,string>( "The Great Gatsby","Scott Fitzgerald") },
+    {"978-1-61-729494-5", new Tuple<string,string>( "C# in Depth","Jon Skeet") }
+};
+
+string ISBN1 = "978-3-16-148410-0", ISBN2 = "978-1-61-729494-5";
+
+
+var Reslut1 = RetriveBookInformation(ISBN1, Books);
+Console.WriteLine($"\n\n ISBN : 978-3-16-148410-0 , Title : {Reslut1.Title}, Author : {Reslut1.Aouthor} ");
+
+var Reslut2 = RetriveBookInformation(ISBN2, Books);
+Console.WriteLine($"\n\n ISBN : 978-1-61-729494-5 , Title : {Reslut2.Title}, Author : {Reslut2.Aouthor} ");
+
+static (string Title, string Aouthor) RetriveBookInformation(string ISBN, Dictionary<string, Tuple<string, string>> Books)
+{
+    if (Books.ContainsKey(ISBN))
+    {
+        return (Books[ISBN].Item1, Books[ISBN].Item2);
+    }
+
+    return (string.Empty, string.Empty);
+}

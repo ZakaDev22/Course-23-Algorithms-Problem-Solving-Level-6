@@ -1,0 +1,42 @@
+
+string input = "hello world hello universe";
+
+Console.WriteLine($"\n\n Hello : {WordCounter(input, "hello")}");
+
+Console.WriteLine($"\n\n world : {WordCounter(input, "world")}");
+
+Console.WriteLine($"\n\n universe : {WordCounter(input, "universe")}");
+
+int WordCounter(string input, string WordToCount)
+{
+    int count = 0;
+
+    string[] Words = input.Split(' ');
+
+    foreach (string word in Words)
+    {
+        if (WordToCount.Equals(word))
+            count++;
+    }
+
+    return count;
+}
+
+// Teacher Solution : 
+
+string text = "hello world hello universe";
+Dictionary<string, int> wordCount = new Dictionary<string, int>();
+
+
+foreach (var word in text.Split(' '))
+{
+    if (wordCount.ContainsKey(word))
+        wordCount[word]++;
+    else
+        wordCount[word] = 1;
+}
+
+foreach (var word in wordCount)
+{
+    Console.WriteLine($"{word.Key}: {word.Value}");
+}

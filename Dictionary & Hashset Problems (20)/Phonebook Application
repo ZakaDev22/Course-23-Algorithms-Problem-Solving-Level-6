@@ -1,0 +1,20 @@
+
+Dictionary<string, string> PhoneNumbers = new()
+{
+    {"Alice's","123-456-7890" },
+    {"Bob's","987-654-3210" }
+};
+
+Console.WriteLine($"\n\n Alice's Phone: {GetPhoneNumber("Alice's", PhoneNumbers)}");
+
+Console.WriteLine($"\n\n Bob's Phone: {GetPhoneNumber("Bob's", PhoneNumbers)}");
+
+string GetPhoneNumber(string phoneName, Dictionary<string, string> PhoneNumbers)
+{
+    if (PhoneNumbers.ContainsKey(phoneName))
+    {
+        return PhoneNumbers[phoneName];
+    }
+
+    return string.Empty;
+}

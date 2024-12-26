@@ -1,0 +1,45 @@
+
+
+List<int> Numbers = new([1, 2, 2, 3, 4, 5, 3]);
+
+Dictionary<int, int> frequencies = new();
+
+foreach (var item in Numbers)
+{
+    if (!frequencies.ContainsKey(item))
+        frequencies[item] = 1;
+    else
+        frequencies[item]++;
+}
+
+List<int> DuplicateElements = frequencies.Where(x => x.Value == 1).Select(x => x.Key).ToList();
+
+Console.WriteLine($"\n\n Unique Elements : {string.Join(", ", DuplicateElements)}");
+
+// Teacher Solution :
+
+static List<int> FindUniqueElements(int[] nums)
+{
+    Dictionary<int, int> counts = new Dictionary<int, int>();
+    List<int> unique = new List<int>();
+
+
+    foreach (int num in nums)
+    {
+        if (!counts.ContainsKey(num))
+            counts[num] = 0;
+
+
+        counts[num]++;
+    }
+
+
+    foreach (var kvp in counts)
+    {
+        if (kvp.Value == 1)
+            unique.Add(kvp.Key);
+    }
+
+
+    return unique;
+}

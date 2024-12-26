@@ -1,0 +1,46 @@
+
+List<int> Numbers = new([1, 2, 3, 4, 2, 5, 6, 1]);
+
+Dictionary<int, int> frequencies = new();
+
+foreach (var item in Numbers)
+{
+    if (!frequencies.ContainsKey(item))
+        frequencies[item] = 1;
+    else
+        frequencies[item]++;
+}
+
+List<int> DuplicateElements = frequencies.Where(x => x.Value > 1).Select(x => x.Key).ToList();
+
+Console.WriteLine($"\n\n Duplicate Elements : {string.Join(", ", DuplicateElements)}");
+
+
+
+// Teacher Solution : 
+
+int[] nums = { 1, 2, 3, 4, 2, 5, 6, 1 };
+Console.WriteLine(string.Join(", ", FindDuplicates(nums))); // Output: 1, 2
+
+static List<int> FindDuplicates(int[] nums)
+{
+    Dictionary<int, int> counts = new Dictionary<int, int>();
+    List<int> duplicates = new List<int>();
+
+
+    foreach (int num in nums)
+    {
+        if (counts.ContainsKey(num))
+        {
+            counts[num]++;
+            if (counts[num] == 2) // Add to duplicates only once
+                duplicates.Add(num);
+        }
+        else
+        {
+            counts[num] = 1;
+        }
+    }
+
+    return duplicates;
+}

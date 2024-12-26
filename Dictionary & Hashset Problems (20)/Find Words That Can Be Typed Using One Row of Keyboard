@@ -1,0 +1,120 @@
+
+List<string> Words = new(["Hello", "Alaska", "Dad", "Peace"]);
+
+Dictionary<int, List<char>> KeyboardLines = new()
+{
+    {1, new List<char> {'q','w','e','r','t','y','u','i','o','p'} },
+    {2, new List<char> {'a','s','d','f','g','h','j','k','l'} },
+    {3, new List<char> {'z','x','c','v','b','n','m'} }
+};
+
+Console.WriteLine($""""
+                     all words that can be typed using one row of a QWERTY keyboard
+                     output : {string.Join(", ", WordsThatCanBeTypedUsingOneRowOfKeyboard(Words, KeyboardLines))}
+                   """");
+
+
+bool IsCharacterInTheRightLine(char ch, List<char> list)
+{
+    foreach (var item in list)
+    {
+        if (char.ToLower(ch) == item)
+            return true;
+    }
+
+    return false;
+}
+
+int RetriveWordCharacterLine(char ch, Dictionary<int, List<char>> KeyboardLines)
+{
+    foreach (var item in KeyboardLines)
+    {
+        foreach (var item1 in item.Value)
+        {
+            if (char.ToLower(ch) == item1)
+                return item.Key;
+        }
+    }
+
+    return -1;
+}
+
+List<string> WordsThatCanBeTypedUsingOneRowOfKeyboard(List<string> words, Dictionary<int, List<char>> KeyboardLines)
+{
+    var newlist = new List<string>();
+    bool AddWord = true;
+    int WordInLineNo = 0;
+
+    foreach (var word in words)
+    {
+        AddWord = true;
+        WordInLineNo = RetriveWordCharacterLine(word[0], KeyboardLines);
+        var CharactersLine = KeyboardLines.FirstOrDefault(x => x.Key == WordInLineNo).Value;
+
+        foreach (char item in word)
+        {
+            if (!IsCharacterInTheRightLine(item, CharactersLine))
+
+            {
+                AddWord = false;
+                break;
+            }
+        }
+
+        if (AddWord)
+        {
+            newlist.Add(word);
+        }
+
+    }
+
+
+    return newlist;
+}
+
+// Teacher Solution :
+
+string[] words = { "Hello", "Alaska", "Dad", "Peace" };
+Console.WriteLine(string.Join(", ", FindWords(words))); // Output: "Alaska, Dad"
+
+static string[] FindWords(string[] words)
+{
+    string[] rows = { "qwertyuiop", "asdfghjkl", "zxcvbnm" };
+    Dictionary<char, int> charRow = new Dictionary<char, int>();
+
+
+    for (int i = 0; i < rows.Length; i++)
+    {
+        foreach (char c in rows[i])
+        {
+            charRow[c] = i;
+        }
+    }
+
+
+    List<string> result = new List<string>();
+
+
+    foreach (string word in words)
+    {
+        int row = charRow[char.ToLower(word[0])];
+        bool isValid = true;
+
+
+        foreach (char c in word)
+        {
+            if (charRow[char.ToLower(c)] != row)
+            {
+                isValid = false;
+                break;
+            }
+        }
+
+
+        if (isValid)
+            result.Add(word);
+    }
+
+
+    return result.ToArray();
+}

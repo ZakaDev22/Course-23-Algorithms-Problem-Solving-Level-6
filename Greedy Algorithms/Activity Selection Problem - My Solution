@@ -1,0 +1,39 @@
+
+Dictionary<int, (int, int)> Activities = new()
+ {
+     {1, (1,4) },
+     {2, (3,5) },
+     {3, (0,6) },
+     {4, (5,7) },
+     {5, (8,9) },
+     {6, (5,6) }
+ };
+
+var result = RetriveValidActivities(Activities);
+
+Console.WriteLine($""""
+                         The Valid Activities : {string.Join(", ", result)}
+                   """");
+
+
+static Dictionary<int, (int, int)> RetriveValidActivities(Dictionary<int, (int, int)> Activities)
+{
+    Dictionary<int, (int, int)> SelectedActivities = new();
+
+    foreach (var key in Activities)
+    {
+        if (SelectedActivities.Count == 0 && Activities.Count > 0)
+        {
+            SelectedActivities.Add(key.Key, key.Value);
+        }
+
+        var lastKey = SelectedActivities.LastOrDefault();
+
+        if ((key.Value.Item1 >= lastKey.Value.Item2) && (key.Value.Item2 > lastKey.Value.Item2))
+        {
+            SelectedActivities.Add(key.Key, key.Value);
+        }
+    }
+
+    return SelectedActivities;
+}

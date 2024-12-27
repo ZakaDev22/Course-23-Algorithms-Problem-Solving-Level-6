@@ -1,0 +1,87 @@
+
+string[] input = { "bella", "label", "roller" };
+
+Dictionary<char, int> charFrequency = FindCommonCharactersinStrings(input);
+
+Console.WriteLine($"\n\n all common characters between multiple strings : {string.Join(", ", charFrequency)}");
+// result :  all common characters between multiple strings : [e, 3], [l, 6]
+
+bool IsMatched(string Word, char ch)
+{
+    bool Matched = false;
+    foreach (var item in Word)
+    {
+        if (ch == item)
+            Matched = true;
+    }
+
+    return Matched;
+}
+
+Dictionary<char, int> FindCommonCharactersinStrings(string[] input)
+{
+    Dictionary<char, int> charFrequency = new();
+
+    bool Matched = false;
+    foreach (var word in input)
+    {
+        foreach (var ch in word)
+        {
+            foreach (var w in input.Where(w => w != word))
+            {
+                if (IsMatched(w, ch))
+                    Matched = true;
+                else
+                    Matched = false;
+            }
+
+            if (Matched)
+            {
+                if (charFrequency.ContainsKey(ch))
+                    charFrequency[ch]++;
+                else
+                    charFrequency[ch] = 1;
+            }
+        }
+    }
+
+    return charFrequency;
+}
+
+// Teacher Method : 
+
+var result = CommonChars(new[] { "bella", "label", "roller" });
+Console.WriteLine(string.Join(", ", result)); // Output: e, l, l
+
+static List<string> CommonChars(string[] words)
+{
+    int[] minFreq = new int[26];
+    Array.Fill(minFreq, int.MaxValue);
+
+
+    foreach (string word in words)
+    {
+        int[] charFreq = new int[26];
+        foreach (char c in word)
+        {
+            charFreq[c - 'a']++;
+        }
+
+
+        for (int i = 0; i < 26; i++)
+        {
+            minFreq[i] = Math.Min(minFreq[i], charFreq[i]);
+        }
+    }
+
+    List<string> result = new List<string>();
+    for (int i = 0; i < 26; i++)
+    {
+        for (int j = 0; j < minFreq[i]; j++)
+        {
+            result.Add(((char)(i + 'a')).ToString());
+        }
+    }
+
+    return result;
+}

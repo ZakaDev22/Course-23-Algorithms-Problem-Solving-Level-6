@@ -1,0 +1,73 @@
+// # 1 Coin Change Problem
+
+int Dollars = 33;
+
+
+var result = RetriveCoinChange(Dollars);
+
+var DollarsCount = result.Sum(x => x.Value);
+
+Console.WriteLine($"\n\n Number Of Dollar Papers : {DollarsCount}");
+
+Console.WriteLine($"\n\n Number Of Each $  : {string.Join(", ", result)}");
+
+void Calc(ref float remain, ref float Dollars, int DevideBy, ref Dictionary<short, int> CoinsCount)
+{
+    remain = Dollars / DevideBy;
+
+    while (remain >= 1)
+    {
+        CoinsCount[(short)DevideBy]++;
+        Dollars -= DevideBy;
+        remain--;
+    }
+
+    remain = remain * DevideBy;
+}
+
+Dictionary<short, int> RetriveCoinChange(float Dollars)
+{
+    Dictionary<short, int> CoinsCount = new()
+    {
+        {100,0 },
+        {50,0 },
+        {20,0 },
+        {10,0 },
+        {5,0 },
+        {1,0 }
+    };
+
+    float remain = 0;
+
+    while (Dollars > 0)
+    {
+        if (Dollars >= 100)
+        {
+            Calc(ref remain, ref Dollars, 100, ref CoinsCount);
+        }
+        else if (Dollars < 100 && Dollars >= 50)
+        {
+            Calc(ref remain, ref Dollars, 50, ref CoinsCount);
+        }
+        else if (Dollars < 50 && Dollars >= 20)
+        {
+            Calc(ref remain, ref Dollars, 20, ref CoinsCount);
+        }
+        else if (Dollars < 20 && Dollars >= 10)
+        {
+            Calc(ref remain, ref Dollars, 10, ref CoinsCount);
+        }
+        else if (Dollars < 10 && Dollars >= 5)
+        {
+            Calc(ref remain, ref Dollars, 5, ref CoinsCount);
+        }
+        else if (Dollars < 5 && Dollars >= 1)
+        {
+            Calc(ref remain, ref Dollars, 1, ref CoinsCount);
+        }
+    }
+
+    return CoinsCount;
+}
+
+

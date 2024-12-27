@@ -1,0 +1,36 @@
+
+int[] Numbers1 = { 1, 2, 3, 4 }, Numbers2 = { 3, 4, 5, 6 };
+
+var set1 = new HashSet<int>(Numbers1);
+var set2 = new HashSet<int>(Numbers2);
+
+var set3 = new HashSet<int>();
+
+foreach (var item in set1)
+{
+    if (!set2.Contains(item))
+    {
+        set3.Add(item);
+    }
+}
+
+Console.WriteLine($"\n\n all elements in the first array that are not in the second array : {string.Join(", ", set3)}");
+
+// Teacher Method : 
+
+
+static int[] ElementsNotInSecondArray(int[] nums1, int[] nums2)
+{
+    HashSet<int> set2 = new HashSet<int>(nums2);
+    List<int> result = new List<int>();
+
+
+    foreach (int num in nums1)
+    {
+        if (!set2.Contains(num))
+            result.Add(num);
+    }
+
+
+    return result.ToArray();
+}

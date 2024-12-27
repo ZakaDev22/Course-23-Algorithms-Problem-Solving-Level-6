@@ -1,0 +1,33 @@
+
+int[] nums1 = [1, 2, 3], nums2 = [4, 5, 6];
+
+HashSet<int> set = new(nums2);
+
+Console.WriteLine($"\n\n Is Arrays Have No Common Elements : {IsArraysHaveNoCommonElements(nums1, set)}");
+
+bool IsArraysHaveNoCommonElements(int[] nums, HashSet<int> set)
+{
+
+    for (int i = 0; i < nums1.Length; i++)
+    {
+        if (set.Contains(nums1[i]))
+            return false;
+    }
+    return true;
+}
+
+// Teacher Method : 
+
+static bool AreDisjoint(int[] nums1, int[] nums2)
+{
+    HashSet<int> set = new HashSet<int>(nums1);
+
+
+    foreach (int num in nums2)
+    {
+        if (set.Contains(num))
+            return false;
+    }
+
+    return true;
+}

@@ -1,0 +1,20 @@
+
+SortedList<int, int> set = new();
+
+for (int i = 0; i < 10; i++)
+{
+    set.Add(i, i);
+}
+
+int low = 2, hight = 4;
+
+var result = set.Where(x => x.Value >= low && x.Value <= hight);
+
+Console.WriteLine($"\n\n Result : {string.Join(", ", result.Select(x => x.Value))}");
+
+// Teacher solution :
+
+SortedSet<int> sortedSet = new SortedSet<int> { 1, 2, 3, 4, 5 };
+var range = sortedSet.GetViewBetween(2, 4);
+
+Console.WriteLine(string.Join(", ", range)); // Output: 2, 3, 4

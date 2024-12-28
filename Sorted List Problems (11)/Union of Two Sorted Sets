@@ -1,0 +1,14 @@
+
+SortedSet<int> set1 = [1, 2, 3], set2 = [3, 4, 5];
+
+var set3 = set1.Union(set2);
+
+Console.WriteLine($"\n\n Result : {string.Join(", ", set3)}");
+
+// techer Solution : 
+
+SortedSet<int> set4 = new SortedSet<int> { 1, 2, 3 };
+SortedSet<int> set5 = new SortedSet<int> { 3, 4, 5 };
+
+set4.UnionWith(set2);
+Console.WriteLine(string.Join(", ", set4)); // Output: 1, 2, 3, 4, 5

@@ -1,0 +1,18 @@
+
+
+SortedSet<int> sortedSet = new SortedSet<int> { 1, 2, 3, 4, 5 };
+var range = sortedSet.GetViewBetween(int.MinValue, 4 - 1);
+
+Console.WriteLine(string.Join(", ", range));
+
+//teacher solution 
+
+SortedSet<int> set = new SortedSet<int> { 1, 2, 3, 4, 5 };
+int value = 4;
+Console.WriteLine(string.Join(", ", ElementsLessThan(set, value))); // Output: 1, 2, 3
+
+static IEnumerable<int> ElementsLessThan(SortedSet<int> set, int value)
+{
+    return set.GetViewBetween(int.MinValue, value - 1);
+}
+

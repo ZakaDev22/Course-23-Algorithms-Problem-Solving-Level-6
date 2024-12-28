@@ -1,0 +1,19 @@
+
+SortedSet<int> sortedSet = new SortedSet<int> { 1, 2, 3, 4, 5 };
+
+int count = sortedSet.Where(x => x > 3).Count();
+int count2 = sortedSet.GetViewBetween(3 + 1, int.MaxValue).Count();
+
+Console.WriteLine($"\n\n Result 1 = {count}");
+Console.WriteLine($"\n\n Result 2 = {count2}");
+
+// Teacher Solution : 
+
+SortedSet<int> set = new SortedSet<int> { 1, 2, 3, 4, 5 };
+int value = 3;
+Console.WriteLine(CountGreaterThan(set, value)); // Output: 2
+
+static int CountGreaterThan(SortedSet<int> set, int value)
+{
+    return set.GetViewBetween(value + 1, int.MaxValue).Count;
+}

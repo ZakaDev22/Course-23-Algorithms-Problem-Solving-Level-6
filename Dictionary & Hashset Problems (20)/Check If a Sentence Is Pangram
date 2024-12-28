@@ -1,0 +1,31 @@
+
+
+string input = "The quick brown fox jumps over the lazy dog";
+
+var result = SentenceIsPangram(input);
+
+Console.WriteLine($"\n\n Result : {result}");
+
+bool SentenceIsPangram(string inpute)
+{
+    HashSet<char> UniqueCharacters = inpute.ToUpper().Where(x => char.IsLetter(x))
+                                           .OrderBy(z => z)
+                                           .ToHashSet();
+
+    return UniqueCharacters.Count == 26;
+}
+
+// teacher Method : 
+static bool IsPangram(string sentence)
+{
+    HashSet<char> letters = new HashSet<char>();
+
+
+    foreach (char c in sentence.ToLower())
+    {
+        if (char.IsLetter(c))
+            letters.Add(c);
+    }
+
+    return letters.Count == 26;
+}

@@ -1,0 +1,36 @@
+
+
+SortedSet<int> set = [1, 2, 3, 4, 5];
+
+(int, int)[] ranges = { (1, 2), (4, 5) };
+
+var result = IsSetContainsMultipleRanges(ranges, set);
+
+Console.WriteLine($"\n\n IsSetContainsMultipleRanges : {result}");
+
+static bool IsSetContainsMultipleRanges((int low, int higth)[] ranges, SortedSet<int> set)
+{
+    foreach (var range in ranges)
+    {
+        if (set.GetViewBetween(range.low, range.higth).Count == 0)
+            return false;
+    }
+
+    return true;
+}
+
+// Teacher sol :
+
+var ranges1 = new List<(int, int)> { (1, 2), (4, 5) };
+Console.WriteLine(ContainsAllRanges(set, ranges1)); // Output: True
+
+static bool ContainsAllRanges(SortedSet<int> set, List<(int, int)> ranges)
+{
+    foreach (var (low, high) in ranges)
+    {
+        var range = set.GetViewBetween(low, high);
+        if (range.Count != (high - low + 1))
+            return false;
+    }
+    return true;
+}

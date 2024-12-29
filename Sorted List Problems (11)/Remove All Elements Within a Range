@@ -1,0 +1,23 @@
+
+SortedSet<int> set = [1, 2, 3, 4, 5];
+
+var result = RemoveAllElementsWithinARange(set);
+Console.WriteLine($"\n\n Result : {string.Join(", ", result)}");
+
+static SortedSet<int> RemoveAllElementsWithinARange(SortedSet<int> set)
+{
+    var range = set.GetViewBetween(2, 4);
+
+    set.RemoveWhere(x => range.Contains(x));
+
+    return set;
+}
+
+// Teacher Solution :
+
+SortedSet<int> set1 = new SortedSet<int> { 1, 2, 3, 4, 5 };
+var range1 = set1.GetViewBetween(2, 4);
+range1.Clear();
+
+
+Console.WriteLine(string.Join(", ", set1)); // Output: 1, 5

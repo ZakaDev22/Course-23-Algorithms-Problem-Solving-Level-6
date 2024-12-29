@@ -1,0 +1,107 @@
+
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+
+ObservableCollection<clsStudents> Mystudents = new ObservableCollection<clsStudents>();
+
+Mystudents.CollectionChanged += Items_CollectionChanged;
+
+Mystudents.Add(new clsStudents(1, "zaka"));
+Mystudents.Add(new clsStudents(2, "hamza"));
+Mystudents.Add(new clsStudents(3, "ss"));
+Mystudents.Add(new clsStudents(4, "haha"));
+Mystudents.Add(new clsStudents(5, "hoho"));
+
+Mystudents.RemoveAt(3);
+
+
+
+// CollectionChanged Event Handler
+static void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+{
+    Console.WriteLine("\nCollection Changed:");
+
+
+    // Handling Collection Changes
+    switch (e.Action)
+    {
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+            Console.WriteLine("Added:");
+            foreach (var newItem in e.NewItems)
+            {
+                var student = (clsStudents)newItem;
+                Console.WriteLine($" Student ID : {student.Id} , Name : {student.Name}");
+            }
+            break;
+
+
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+            Console.WriteLine("Removed:");
+            foreach (var oldItem in e.OldItems)
+            {
+                var student = (clsStudents)oldItem;
+                Console.WriteLine($" Student ID : {student.Id} , Name : {student.Name}");
+            }
+            break;
+
+
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+            Console.WriteLine("Replaced:");
+            foreach (var oldItem in e.OldItems)
+            {
+                var student = (clsStudents)oldItem;
+                Console.WriteLine($" Student ID : {student.Id} , Name : {student.Name}");
+            }
+            Console.WriteLine("With:");
+            foreach (var newItem in e.NewItems)
+            {
+                var student = (clsStudents)newItem;
+                Console.WriteLine($" Student ID : {student.Id} , Name : {student.Name}");
+            }
+            break;
+
+
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+            Console.WriteLine("Moved:");
+            Console.WriteLine($"- From index {e.OldStartingIndex} to index {e.NewStartingIndex}");
+            break;
+    }
+}
+
+
+public class clsStudents
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public clsStudents(int id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
+}
+
+
+// Teacher Sol :
+
+ObservableCollection<string> students = new ObservableCollection<string>();
+
+students.CollectionChanged += (sender, e) =>
+{
+    //this event will be fired on any change (add or remove.
+
+    if (e.Action == NotifyCollectionChangedAction.Add)
+        Console.WriteLine($"New Student Added: {e.NewItems[0]}");
+    if (e.Action == NotifyCollectionChangedAction.Remove)
+        Console.WriteLine($"Student Removed: {e.OldItems[0]}");
+
+};
+
+students.Add("Alice");
+students.Add("Bob");
+students.Remove("Alice");
+// Output:
+// New Student Added: Alice
+// New Student Added: Bob
+// Student Removed: Alice

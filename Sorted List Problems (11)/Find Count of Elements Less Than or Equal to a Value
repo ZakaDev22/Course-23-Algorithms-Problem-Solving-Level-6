@@ -1,0 +1,18 @@
+
+SortedSet<int> set = [1, 2, 3, 4, 5];
+
+var result = FindCountOfElementsLessThanOrEqualToAValue(set, 3);
+
+Console.WriteLine($"\n\n Result = {result}");
+
+static int FindCountOfElementsLessThanOrEqualToAValue(SortedSet<int> set, int value)
+{
+    return set.GetViewBetween(int.MinValue, value).Count;
+}
+
+// techer sol : 
+
+static int CountLessThanOrEqual(SortedSet<int> set, int value)
+{
+    return set.GetViewBetween(int.MinValue, value).Count;
+}

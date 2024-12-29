@@ -1,0 +1,24 @@
+
+
+
+SortedSet<int> set = [1, 2, 3, 4, 5];
+
+var result = FindAllElementsNotInARange(set, 2, 4);
+Console.WriteLine($"\n\n Result : {string.Join(", ", result)}");
+
+static IEnumerable<int> FindAllElementsNotInARange(SortedSet<int> set, int low, int high)
+{
+    var range = set.GetViewBetween(low, high);
+
+    return set.Where(x => !range.Contains(x)).ToList();
+}
+
+// Teacher Sol :
+
+static IEnumerable<int> ElementsNotInRange(SortedSet<int> set, int low, int high)
+{
+    var range = set.GetViewBetween(low, high);
+    SortedSet<int> result = new SortedSet<int>(set);
+    result.ExceptWith(range);
+    return result;
+}

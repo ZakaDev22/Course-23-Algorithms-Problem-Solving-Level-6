@@ -1,0 +1,29 @@
+
+
+Dictionary<string, int> Players = new()
+{
+    {"Zakaria",5 },
+    {"Ronaldo",1 },
+    {"messi",4 },
+    {"aaa",4 },
+    {"baz",10 },
+};
+
+foreach (var item in Players.OrderBy(x => x.Key))
+{
+    Console.WriteLine($"\n Player Name : {item.Key},  Player Goals : {item.Value}");
+}
+
+// teacher sol :
+
+SortedList<string, int> leaderboard = new SortedList<string, int>
+        {
+            { "Alice", 1200 },
+            { "Charlie", 1500 },
+            { "Bob", 1300 }
+        };
+
+foreach (var player in leaderboard)
+{
+    Console.WriteLine($"Player: {player.Key}, Score: {player.Value}");
+}

@@ -1,0 +1,52 @@
+
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+ObservableCollection<string> LiveChatApp = new();
+
+LiveChatApp.CollectionChanged += (s, e) =>
+{
+    switch (e.Action)
+    {
+        case NotifyCollectionChangedAction.Add:
+            {
+                Console.WriteLine($"\n\n Add :");
+                Console.WriteLine($"\nNew Messgae Added: {e.NewItems[0]} ");
+                break;
+            }
+        case NotifyCollectionChangedAction.Remove:
+            {
+                Console.WriteLine($"\n\n Remove  :");
+
+                Console.WriteLine($"\n  Messgae Removed: {e.OldItems[0]} ");
+
+                break;
+            }
+        case NotifyCollectionChangedAction.Replace:
+            {
+                Console.WriteLine($"\n\n Update :");
+
+                Console.WriteLine($"\n Old Messgae: {e.OldItems[0]} ");
+                Console.WriteLine($"\n Messgae Updated To: {e.NewItems[0]} ");
+                break;
+            }
+    }
+};
+
+LiveChatApp.Add("Hello Zaka How Are You");
+LiveChatApp.Add("Hi SS Im Dion Greate Thank You");
+LiveChatApp.Add("How About You SS How Have You Been This Summer");
+LiveChatApp.Add("You Know Zaka Just Like The Normal Days Just The Hard work");
+LiveChatApp.Add("Well SS Thats Good To Know :-)");
+
+// Teacher Sol :
+
+ObservableCollection<string> chatMessages = new ObservableCollection<string>();
+chatMessages.CollectionChanged += (sender, e) =>
+{
+    if (e.Action == NotifyCollectionChangedAction.Add)
+        Console.WriteLine($"\nNew Message: {e.NewItems[0]}");
+};
+
+chatMessages.Add("Hello!");
+chatMessages.Add("How are you?");

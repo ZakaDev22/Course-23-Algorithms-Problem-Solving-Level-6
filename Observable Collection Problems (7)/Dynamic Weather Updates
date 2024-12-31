@@ -1,0 +1,68 @@
+
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+Dictionary<string, int> Cities = new Dictionary<string, int>()
+{
+    {"Marrakesh",44 },
+    {"Casablanca",37 },
+    {"Fes",40 },
+    {"Rabat",23 }
+};
+
+ObservableCollection<Dictionary<string, int>> CitiesWeather = new();
+
+CitiesWeather.CollectionChanged += (s, e) =>
+{
+    switch (e.Action)
+    {
+        case NotifyCollectionChangedAction.Add:
+            {
+                var newResult = (Dictionary<string, int>)e.NewItems[0];
+                Console.WriteLine($"\n\n Add :");
+                Console.WriteLine($"\nNew City Added: {newResult.FirstOrDefault().Key} With Weather {newResult.FirstOrDefault().Value}");
+                break;
+            }
+        case NotifyCollectionChangedAction.Remove:
+            {
+                Console.WriteLine($"\n\n Remove  :");
+
+                var OldResult = (Dictionary<string, int>)e.OldItems[0];
+                Console.WriteLine($"\n City Deleted : {OldResult.FirstOrDefault().Key} With Weather = {OldResult.FirstOrDefault().Value}");
+
+                break;
+            }
+        case NotifyCollectionChangedAction.Replace:
+            {
+                Console.WriteLine($"\n\n Update :");
+                var OldResult = (Dictionary<string, int>)e.OldItems[0];
+                var NewResult = (Dictionary<string, int>)e.NewItems[0];
+
+                Console.WriteLine($"\n Old City : {OldResult.FirstOrDefault().Key} With Weather = {OldResult.FirstOrDefault().Value}");
+                Console.WriteLine($"\n New City : {NewResult.FirstOrDefault().Key} With Weather = {NewResult.FirstOrDefault().Value}");
+
+                break;
+            }
+    }
+};
+
+
+CitiesWeather.Add(Cities.Where(x => x.Key == "Marrakesh").ToDictionary());
+CitiesWeather.Add(Cities.Where(x => x.Key == "Casablanca").ToDictionary());
+CitiesWeather.Add(Cities.Where(x => x.Key == "Fes").ToDictionary());
+CitiesWeather.Add(Cities.Where(x => x.Key == "Rabat").ToDictionary());
+
+//Teacher Sol : 
+
+ObservableCollection<string> weatherUpdates = new ObservableCollection<string>();
+weatherUpdates.CollectionChanged += (sender, e) =>
+{
+    if (e.Action == NotifyCollectionChangedAction.Add)
+        Console.WriteLine($"Weather Update: {e.NewItems[0]}");
+};
+
+weatherUpdates.Add("New York: Sunny, 25°C");
+weatherUpdates.Add("London: Rainy, 15°C");
+// Output:
+// Weather Update: New York: Sunny, 25°C
+// Weather Update: London: Rainy, 15°C

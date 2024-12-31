@@ -1,0 +1,28 @@
+
+
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+ObservableCollection<string> Orders = new ObservableCollection<string>();
+Orders.CollectionChanged += (sender, e) =>
+{
+    if (e.Action == NotifyCollectionChangedAction.Add)
+        Console.WriteLine($"\nNew Order: {e.NewItems[0]}");
+};
+
+Orders.Add("Pizza");
+Orders.Add("Tajin");
+Orders.Add("Apple");
+
+// Teacher Sol : 
+
+ObservableCollection<string> notifications = new ObservableCollection<string>();
+notifications.CollectionChanged += (sender, e) =>
+{
+    if (e.Action == NotifyCollectionChangedAction.Add)
+        Console.WriteLine($"New Notification: {e.NewItems[0]}");
+};
+
+notifications.Add("Your order is under processing.");
+notifications.Add("Your order has been shipped.");
+notifications.Add("Your order is Delivered.");

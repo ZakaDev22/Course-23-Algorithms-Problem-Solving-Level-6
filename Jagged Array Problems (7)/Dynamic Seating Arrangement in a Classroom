@@ -1,0 +1,35 @@
+
+int[][] MyclassroomSeats = new int[][]
+{
+     [1, 2, 3,4,5,6,7],
+     [1,2,3,4,5,6,7,8,9,],
+     [1,2,3,4,5,6,7,8,9,10,11,12]
+};
+
+
+
+for (int i = 0; i < MyclassroomSeats.Length; i++)
+{
+    Console.Write($"\n\n classroom {i + 1} : ");
+
+    Console.Write(string.Join(", ", MyclassroomSeats[i]));
+}
+
+// Teacher Sol : 
+
+int[][] classroomSeats = new int[3][];
+classroomSeats[0] = new int[] { 1, 2, 3 }; // Row 1
+classroomSeats[1] = new int[] { 4, 5 };    // Row 2
+classroomSeats[2] = new int[] { 6, 7, 8, 9 }; // Row 3
+
+
+Console.WriteLine("\n\nClassroom Seating:");
+for (int i = 0; i < classroomSeats.Length; i++)
+{
+    Console.Write($"Row {i + 1}: ");
+    foreach (int seat in classroomSeats[i])
+    {
+        Console.Write(seat + " ");
+    }
+    Console.WriteLine();
+}

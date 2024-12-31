@@ -1,0 +1,43 @@
+
+
+int[][] DailySales = new int[][]
+{
+     [29, 33, 88],
+     [11,22,370],
+     [55,32,14]
+};
+
+
+for (int i = 0; i < DailySales.Length; i++)
+{
+    Console.Write($"\n\n --------------------- Day {i + 1} --------------------------------- ");
+
+    for (int j = 0; j < DailySales[i].Length; j++)
+    {
+        if (j == 0)
+            Console.WriteLine($"\n \t apple : {DailySales[i][j]}");
+        else if (j == 1)
+            Console.WriteLine($"\n \t potato : {DailySales[i][j]}");
+        else if (j == 2)
+            Console.WriteLine($"\n \t banana : {DailySales[i][j]}");
+    }
+}
+
+// Teacher Sol : 
+
+int[][] productSales = new int[3][];
+productSales[0] = new int[] { 100, 200, 150 }; // Product 1
+productSales[1] = new int[] { 300, 400 };      // Product 2
+productSales[2] = new int[] { 500, 600, 550, 700 }; // Product 3
+
+
+Console.WriteLine("Sales Data:");
+for (int i = 0; i < productSales.Length; i++)
+{
+    Console.Write($"Product {i + 1}: ");
+    foreach (int sale in productSales[i])
+    {
+        Console.Write(sale + " ");
+    }
+    Console.WriteLine();
+}

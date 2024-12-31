@@ -1,0 +1,70 @@
+
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+ObservableCollection<Dictionary<string, int>> StockPrices = new();
+
+StockPrices.CollectionChanged += (s, e) =>
+{
+    switch (e.Action)
+    {
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+            {
+                var newResult = (Dictionary<string, int>)e.NewItems[0];
+                Console.WriteLine($"\n\n Add :");
+                Console.WriteLine($"\nNew Item Added: {newResult.FirstOrDefault().Key} With Price {newResult.FirstOrDefault().Value}");
+                break;
+            }
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+            {
+                Console.WriteLine($"\n\n Remove  :");
+
+                var OldResult = (Dictionary<string, int>)e.OldItems[0];
+                Console.WriteLine($"\n Price Item Deleted : {OldResult.FirstOrDefault().Key} With Price = {OldResult.FirstOrDefault().Value}");
+
+                break;
+            }
+        case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+            {
+                Console.WriteLine($"\n\n Update :");
+                var OldResult = (Dictionary<string, int>)e.OldItems[0];
+                var NewResult = (Dictionary<string, int>)e.NewItems[0];
+
+                Console.WriteLine($"\n Old Item : {OldResult.FirstOrDefault().Key} With Price = {OldResult.FirstOrDefault().Value}");
+                Console.WriteLine($"\n New Item : {NewResult.FirstOrDefault().Key} With Price = {NewResult.FirstOrDefault().Value}");
+
+                break;
+            }
+    }
+};
+
+var Items = new Dictionary<string, int>()
+{
+    {"laptop",999},
+    {"TV",522 },
+    {"PC",899 },
+    {"S25",1000}
+};
+
+StockPrices.Add(Items.Where(x => x.Key == "laptop").ToDictionary());
+StockPrices.Add(Items.Where(x => x.Key == "TV").ToDictionary());
+StockPrices.Add(Items.Where(x => x.Key == "PC").ToDictionary());
+StockPrices.Add(Items.Where(x => x.Key == "S25").ToDictionary());
+
+StockPrices.RemoveAt(0);
+
+Items["TV"] = 999;
+
+StockPrices[0] = Items.Where(x => x.Key == "TV").ToDictionary();
+
+// Teacher Sol : 
+
+ObservableCollection<string> stockPrices = new ObservableCollection<string>();
+stockPrices.CollectionChanged += (sender, e) =>
+{
+    if (e.Action == NotifyCollectionChangedAction.Add)
+        Console.WriteLine($"New Stock Price Added: {e.NewItems[0]}");
+};
+
+stockPrices.Add("AAPL: 150.00");
+stockPrices.Add("MSFT: 240.50");

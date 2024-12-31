@@ -1,0 +1,35 @@
+
+bool[][] SurveyResponses = new bool[2][];
+SurveyResponses[0] = new bool[] { true, false, true };
+SurveyResponses[1] = new bool[] { false, false, true, true };
+
+
+Console.WriteLine("Respondents Answers:");
+for (int i = 0; i < SurveyResponses.Length; i++)
+{
+    Console.Write($"respondent {i + 1} Answers : ");
+    foreach (bool seat in SurveyResponses[i])
+    {
+        Console.Write(seat + " , ");
+    }
+    Console.WriteLine();
+}
+
+// Teacher Sol : 
+
+string[][] surveyResponses = new string[3][];
+surveyResponses[0] = new string[] { "Yes", "No" }; // Respondent 1
+surveyResponses[1] = new string[] { "No", "Yes", "Yes" }; // Respondent 2
+surveyResponses[2] = new string[] { "Yes" }; // Respondent 3
+
+
+Console.WriteLine("Survey Responses:");
+for (int i = 0; i < surveyResponses.Length; i++)
+{
+    Console.Write($"Respondent {i + 1}: ");
+    foreach (string response in surveyResponses[i])
+    {
+        Console.Write(response + " ");
+    }
+    Console.WriteLine();
+}

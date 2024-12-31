@@ -1,0 +1,83 @@
+
+
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+ObservableCollection<Dictionary<string, string>> ListOfTasks = new();
+
+ListOfTasks.CollectionChanged += (s, e) =>
+{
+    switch (e.Action)
+    {
+        case NotifyCollectionChangedAction.Add:
+            {
+                var newResult = (Dictionary<string, string>)e.NewItems[0];
+                Console.WriteLine($"\n\n Add :");
+                Console.WriteLine($"\nNew Task Added: {newResult.FirstOrDefault().Key} With Status {newResult.FirstOrDefault().Value}");
+                break;
+            }
+        case NotifyCollectionChangedAction.Remove:
+            {
+                Console.WriteLine($"\n\n Remove  :");
+
+                var OldResult = (Dictionary<string, string>)e.OldItems[0];
+                Console.WriteLine($"\n Task With Name Deleted : {OldResult.FirstOrDefault().Key} With Status = {OldResult.FirstOrDefault().Value}");
+
+                break;
+            }
+        case NotifyCollectionChangedAction.Replace:
+            {
+                Console.WriteLine($"\n\n Update :");
+                var OldResult = (Dictionary<string, string>)e.OldItems[0];
+                var NewResult = (Dictionary<string, string>)e.NewItems[0];
+
+                Console.WriteLine($"\n Old Task : {OldResult.FirstOrDefault().Key} With Status = {OldResult.FirstOrDefault().Value}");
+                Console.WriteLine($"\n New Task : {NewResult.FirstOrDefault().Key} With Status = {NewResult.FirstOrDefault().Value}");
+
+                break;
+            }
+    }
+};
+
+Dictionary<string, string> Task = new()
+{
+    {"Task1","InProgress" },
+    {"Task2","InProgress" },
+    {"Task4","InProgress" },
+    {"Task5","InProgress" },
+};
+
+for (int i = 1; i <= Task.Count; i++)
+{
+    var item = "Task" + i.ToString();
+    ListOfTasks.Add(Task.Where(x => x.Key == item).ToDictionary());
+}
+
+ListOfTasks.Remove(Task.Where(x => x.Key == "Task4").ToDictionary());
+
+Task["Task1"] = "Finished";
+Task["Task2"] = "Not Started";
+
+
+ListOfTasks[0] = Task.Where(x => x.Key == "Task1").ToDictionary();
+ListOfTasks[1] = Task.Where(x => x.Key == "Task2").ToDictionary();
+
+// Teacher Sol : 
+
+
+ObservableCollection<string> tasks = new ObservableCollection<string>();
+tasks.CollectionChanged += (sender, e) =>
+{
+    if (e.Action == NotifyCollectionChangedAction.Add)
+        Console.WriteLine($"Task Added: {e.NewItems[0]}");
+    if (e.Action == NotifyCollectionChangedAction.Remove)
+        Console.WriteLine($"Task Removed: {e.OldItems[0]}");
+};
+
+tasks.Add("Complete report");
+tasks.Add("Attend meeting");
+tasks.Remove("Complete report");
+// Output:
+// Task Added: Complete report
+// Task Added: Attend meeting
+// Task Removed: Complete report

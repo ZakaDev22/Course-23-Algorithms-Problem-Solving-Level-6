@@ -1,0 +1,35 @@
+
+
+clsStudents Student = new clsStudents("Zakaria", 23, 99.99);
+
+var TupleResult = ReturnMultipleStudentInfo(Student);
+
+Console.WriteLine($""""
+
+                      Student Info :
+
+                      Name  : {TupleResult.Name}
+                      Age   : {TupleResult.Age} 
+                      Grade : {TupleResult.Grade}
+
+                  """");
+
+(string Name, int Age, double Grade) ReturnMultipleStudentInfo(clsStudents student)
+{
+    return (student.Name, student.Age, student.Grade);
+}
+
+public record clsStudents(string Name, int Age, double Grade);
+
+// Teacher Sol : 
+
+static (string Name, int Age, double Grade) GetStudentDetails()
+{
+    return ("Alice", 20, 85.5);
+}
+
+
+    var student = GetStudentDetails();
+    Console.WriteLine($"Name: {student.Name}, Age: {student.Age}, Grade: {student.Grade}");
+    // Output: Name: Alice, Age: 20, Grade: 85.5
+    Console.ReadKey();

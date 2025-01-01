@@ -1,0 +1,28 @@
+
+List<(string, double)> EmployeesSalaries = new()
+{
+   { ("zaka",1522.99)},
+   { ("King",1000)},
+   { ("SS",500.98)}
+};
+
+EmployeesSalaries = EmployeesSalaries.OrderByDescending(x => x.Item2).ToList();
+
+for (int i = 0; i < EmployeesSalaries.Count; i++)
+{
+    Console.WriteLine($""""
+                       ----------------- Employee Number {i + 1} --------------
+
+                        Employee Name : {EmployeesSalaries[i].Item1}
+                        With Salary   : {EmployeesSalaries[i].Item2}$
+
+                       -------------------------------------------------------
+                       """");
+}
+
+// Teacher Sol : 
+
+var employee1 = (Name: "Alice", Salary: 50000);
+var employee2 = (Name: "Bob", Salary: 60000);
+
+Console.WriteLine($"{employee1.Name} has {(employee1.Salary > employee2.Salary ? "higher" : "lower")} salary than {employee2.Name}");

@@ -1,0 +1,31 @@
+
+using System.Collections;
+
+BitArray Myseats = new BitArray(1000, false);
+
+Random rand = new Random();
+
+// fill The Seats With Random Data
+for (int i = 0; i < Myseats.Length; i++)
+{
+    if (i % 2 == 0)
+        Myseats[i] = true;
+}
+
+// Print Boked data
+Console.WriteLine("\n\n Boked Seats : \n");
+for (int i = 0; i < Myseats.Length; i++)
+{
+    if (Myseats[i])
+        Console.WriteLine($"\n Seat Number {i + 1} Is Boked");
+}
+
+// Teacher Sol :
+
+BitArray seats = new BitArray(1000, false); // All seats unbooked
+seats[100] = true; // Seat 101 booked
+seats[999] = true; // Seat 1000 booked
+
+
+Console.WriteLine($"Seat 101 booked: {seats[100]}"); // Output: True
+Console.WriteLine($"Seat 1000 booked: {seats[999]}"); // Output: True

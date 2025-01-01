@@ -1,0 +1,36 @@
+
+
+using System.Collections;
+
+BitArray bitArr = new BitArray(8);
+
+bitArr[0] = true;
+
+Console.WriteLine($"\n Turn On light 1 : {BitArrayToString(bitArr)}");
+
+bitArr.SetAll(false);
+bitArr[1] = true;
+
+Console.WriteLine($"\n Turn On light 2 : {BitArrayToString(bitArr)}");
+
+
+static string BitArrayToString(BitArray bitArray)
+{
+    char[] chars = new char[bitArray.Length];
+    for (int i = 0; i < bitArray.Length; i++)
+    {
+        chars[i] = bitArray[i] ? '1' : '0';
+    }
+    return new string(chars);
+}
+
+// Teacher Sol : 
+
+BitArray lights = new BitArray(8, false); // All lights off
+lights[0] = true; // Turn on Light 1
+lights[5] = true; // Turn on Light 6
+
+Console.WriteLine($"Light 1: {lights[0]}, Light 6: {lights[5]}"); // Output: Light 1: True, Light 6: True
+
+lights.SetAll(false); // Turn off all lights
+Console.WriteLine($"Light 1 after reset: {lights[0]}"); // Output: Light 1 after reset: False

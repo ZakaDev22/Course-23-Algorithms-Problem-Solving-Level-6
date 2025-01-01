@@ -1,0 +1,19 @@
+
+var result = ReturnAddress();
+
+Console.WriteLine($""""
+
+                  Address : {result.street}, {result.city}, {result.Region}, {result.CodePostal}
+ 
+                  """");
+
+static (string street, string city, string Region, string CodePostal) ReturnAddress()
+{
+    return ("Konoha", "Marrakesh", "ZZ", "100000");
+}
+
+// Teacher Sol :
+
+var address = (Street: "123 Main St", City: "Springfield", State: "IL", Zip: "62704");
+Console.WriteLine($"Address: {address.Street}, {address.City}, {address.State}, {address.Zip}");
+// Output: Address: 123 Main St, Springfield, IL, 62704

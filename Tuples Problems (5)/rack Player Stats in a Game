@@ -1,0 +1,29 @@
+
+List<(string, int, int)> PlayersList = new List<(string, int, int)>()
+{
+   { ("zaka",90,5)},
+   { ("SS",88,2)},
+   { ("Ziko",90,1)},
+   { ("Me",80,10)}
+};
+
+
+foreach (var item in PlayersList)
+{
+    Console.WriteLine($""""
+                       -------------------------------------------------------
+
+                       Player Name  : {item.Item1}
+                       Player Health: {item.Item2}
+                       Player Score : {item.Item3}
+
+                       -------------------------------------------------------
+                       """");
+}
+
+// Teacher SOl :
+
+
+var player = (Name: "Player1", Health: 100, Score: 2000);
+Console.WriteLine($"Name: {player.Name}, Health: {player.Health}, Score: {player.Score}");
+// Output: Name: Player1, Health: 100, Score: 2000

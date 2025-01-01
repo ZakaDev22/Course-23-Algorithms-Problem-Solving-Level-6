@@ -1,0 +1,45 @@
+
+using System.Collections;
+
+BitArray lights = new(3);
+
+lights[0] = true;
+Console.BackgroundColor = ConsoleColor.Red;
+Console.ForegroundColor = ConsoleColor.White;
+Console.Clear();
+Console.WriteLine("\n\n Red ------------------------------");
+Console.WriteLine("\n\n Red ------------------------------");
+Console.ReadLine();
+
+lights.SetAll(false);
+lights[1] = true;
+Console.BackgroundColor = ConsoleColor.Yellow;
+Console.ForegroundColor = ConsoleColor.Black;
+Console.Clear();
+Console.WriteLine("\n\n Yellow ------------------------------");
+Console.WriteLine("\n\n Yellow ------------------------------");
+Console.ReadLine();
+
+lights.SetAll(false);
+lights[2] = true;
+Console.BackgroundColor = ConsoleColor.Green;
+Console.ForegroundColor = ConsoleColor.White;
+Console.Clear();
+Console.WriteLine("\n\n Green ------------------------------");
+Console.WriteLine("\n\n Green ------------------------------");
+Console.ReadLine();
+
+// Teacher Sol :
+
+BitArray trafficLights = new BitArray(9); // 3 intersections, 3 lights each
+                                          // Green at intersection 1
+trafficLights[2] = true;
+
+
+// Change light to Yellow
+trafficLights[2] = false;
+trafficLights[1] = true;
+
+
+Console.WriteLine("Intersection 1 Lights:");
+Console.WriteLine($"Red: {trafficLights[0]}, Yellow: {trafficLights[1]}, Green: {trafficLights[2]}");

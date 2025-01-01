@@ -1,0 +1,40 @@
+
+using System.Collections;
+
+List<BitArray> UserSurveyResults = new()
+{
+    {  new BitArray(5,true) },
+    {  new BitArray(5,false) },
+    {  new BitArray(5,true) },
+    {  new BitArray(5,false) },
+    {  new BitArray(5,true) }
+};
+
+string result = string.Empty;
+foreach (var bitArr in UserSurveyResults)
+{
+    Console.WriteLine("\n\n------------------------------ User Survey Results  -----------------------------------------");
+    for (int i = 0; i < bitArr.Length; i++)
+    {
+        result = bitArr[i] == true ? "Yes" : "No";
+
+        Console.WriteLine($"\n Answer Number {i + 1} : {result}");
+    }
+}
+
+// Teacher Sol : 
+
+BitArray surveyResponses = new BitArray(5); // 5 questions * 10 users
+
+
+// User 1 responses: Yes, No, Yes, Yes, No
+surveyResponses[0] = true; // Question 1
+surveyResponses[1] = false; // Question 2
+surveyResponses[2] = true; // Question 3
+surveyResponses[3] = true; // Question 4
+surveyResponses[4] = false; // Question 5
+
+for (int i = 0; i < surveyResponses.Length; i++)
+{
+    Console.WriteLine($"User {i + 1}, Question {i + 1}: {surveyResponses[i]}");
+}

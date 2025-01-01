@@ -1,0 +1,24 @@
+
+var result = CheckStudentMark(99);
+var result2 = CheckStudentMark(44);
+
+Console.WriteLine($"\n\n Result Of Mark {result.Mark} Is : {result.Result}");
+
+Console.WriteLine($"\n\n Result Of Mark {result2.Mark} Is : {result2.Result}");
+
+static (bool Result, double Mark) CheckStudentMark(double Mark)
+{
+    return Mark >= 50 ? (true, Mark) : (false, Mark);
+}
+
+// Teacher Sol : 
+
+var result3 = CheckStudentStatus(55);
+Console.WriteLine($"Success: {result3.Success}, Value: {result3.Value}");
+// Output: Success: True, Value: 55
+
+static (bool Success, int Value) CheckStudentStatus(int input)
+{
+    bool success = input >= 50 ? true : false;
+    return (success, input);
+}

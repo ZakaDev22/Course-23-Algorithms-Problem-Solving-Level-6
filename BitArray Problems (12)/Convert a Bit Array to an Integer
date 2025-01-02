@@ -1,0 +1,40 @@
+
+using System.Collections;
+
+BitArray Bits = new([true, false, true]);
+
+
+Console.WriteLine($"\n\n Result Of 101 Is = {ConvertBitsToInt(Bits)}");
+
+static int ConvertBitsToInt(BitArray value)
+{
+    int pow = 1, sum = 0;
+    for (int i = 0; i < value.Length; i++)
+    {
+        if (value[i])
+            sum += pow;
+
+        pow *= 2;
+    }
+
+    return sum;
+}
+
+// Teacher Sol :
+
+BitArray bits = new BitArray(new bool[] { true, false, true }); // Binary: 101
+int number = BitArrayToInt(bits);
+Console.WriteLine("Integer value of BitArray: " + number);
+
+static int BitArrayToInt(BitArray bits)
+{
+    int result = 0;
+    for (int i = 0; i < bits.Length; i++)
+    {
+        if (bits[i])
+        {
+            result += (1 << i); // Add the value of the current bit
+        }
+    }
+    return result;
+}

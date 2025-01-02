@@ -1,0 +1,47 @@
+
+using System.Collections;
+
+BitArray bit1 = new([true, false, true, false, false, true]);
+BitArray bit2 = new([false, false, true, true, false, true]);
+
+var result = PerformAndOperation(bit1, bit2);
+
+Console.WriteLine($"\n\n Result = {BitArrayToString(result)}"); // 001001
+
+static BitArray PerformAndOperation(BitArray bit1, BitArray bit2)
+{
+    return new BitArray(bit1.And(bit2));
+}
+
+static string BitArrayToString(BitArray bitArray)
+{
+    char[] chars = new char[bitArray.Length];
+    for (int i = 0; i < bitArray.Length; i++)
+    {
+        chars[i] = bitArray[i] ? '1' : '0';
+    }
+    return new string(chars);
+}
+
+// teacher Sol : 
+
+
+BitArray bits1 = new BitArray(new bool[] { true, false, true });
+BitArray bits2 = new BitArray(new bool[] { true, true, false });
+
+BitArray result2 = PerformAND(bits1, bits2);
+
+Console.Write("Result of AND operation: ");
+foreach (bool bit in result2)
+{
+    Console.Write(bit + " ");
+}
+
+
+static BitArray PerformAND(BitArray bits1, BitArray bits2)
+{
+    if (bits1.Length != bits2.Length)
+        throw new ArgumentException("BitArrays must have the same length!");
+
+    return bits1.And(bits2);
+}

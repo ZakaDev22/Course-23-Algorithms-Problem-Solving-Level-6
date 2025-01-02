@@ -1,0 +1,36 @@
+
+using System.Collections;
+
+BitArray Answers = new(8);
+
+Answers[0] = true;
+Answers[3] = true;
+Answers[5] = true;
+
+int result = CountValidAnswers(Answers);
+
+Console.WriteLine($"\n\n Answers Count With Yes : {result}"); // 3
+
+static int CountValidAnswers(BitArray Answers)
+{
+    int count = 0;
+    foreach (bool item in Answers)
+    {
+        if (item)
+            count++;
+    }
+    return count;
+}
+
+// Teacher Sol :
+
+BitArray votes = new BitArray(new bool[] { true, false, true, true, false, false, true, true });
+
+
+int yesVotes = 0;
+foreach (bool vote in votes)
+{
+    if (vote) yesVotes++;
+}
+
+Console.WriteLine($"Yes Votes: {yesVotes} out of 8 ");

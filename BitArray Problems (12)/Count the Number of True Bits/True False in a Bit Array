@@ -1,0 +1,55 @@
+
+using System.Collections;
+
+BitArray Answers = new([false, false, true, true, false, true, false, false]);
+
+var result = CountValidAndUnValidAnswers(Answers);
+
+Console.WriteLine($""""
+                     
+                    Answers Count With Yes : {result.YesVotes} 
+                    Answers Count With No  : {result.NoVotes}
+
+                   """");
+
+static (int YesVotes, int NoVotes) CountValidAndUnValidAnswers(BitArray Answers)
+{
+    int Yes = 0, No = 0;
+    foreach (bool item in Answers)
+    {
+        if (item)
+            Yes++;
+        else
+            No++;
+    }
+    return (Yes, No);
+}
+
+// Teacher Sol :
+
+BitArray bits = new BitArray(new bool[] { true, false, true, true, false });
+
+Console.WriteLine("Number of true bits: " + CountTrueBits(bits));
+Console.WriteLine("Number of false bits: " + CountFalesBits(bits));
+
+
+static int CountTrueBits(BitArray bits)
+{
+    int count = 0;
+    foreach (bool bit in bits)
+    {
+        if (bit) count++;
+    }
+    return count;
+}
+
+
+static int CountFalesBits(BitArray bits)
+{
+    int count = 0;
+    foreach (bool bit in bits)
+    {
+        if (!bit) count++;
+    }
+    return count;
+}

@@ -1,0 +1,33 @@
+
+using System.Collections;
+
+Hashtable set = new()
+{
+    {1,1 },
+    {2,2 },
+    {3,3 },
+    {4,4 }
+};
+
+Hashtable set2 = new(set);
+
+foreach (DictionaryEntry item in set2)
+{
+    Console.WriteLine($"\n\t Key : {item.Key}, Value : {item.Value}");
+}
+
+// Teacher Sol :
+
+Hashtable hashtable1 = new Hashtable
+        {
+            { "Name", "Alice" },
+            { "Age", 25 }
+        };
+
+Hashtable hashtable2 = new Hashtable(hashtable1);
+
+Console.WriteLine("Contents of copied Hashtable:");
+foreach (DictionaryEntry entry in hashtable2)
+{
+    Console.WriteLine($"Key: {entry.Key}, Value: {entry.Value}");
+}

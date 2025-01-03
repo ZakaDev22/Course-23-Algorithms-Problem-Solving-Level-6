@@ -1,0 +1,29 @@
+
+SortedDictionary<DateTime, string> list = new()
+{
+    {DateTime.Now.AddHours(1),"Movie 1" },
+    {DateTime.Now.AddHours(3),"Movie 2" },
+    {DateTime.Now.AddHours(5),"Movie 3" },
+};
+
+Console.WriteLine("\n\n Store and sort movie showtimes to display the next available slot. \n\n");
+foreach (var movie in list)
+{
+    Console.WriteLine($"\n Next Movie : {movie.Value} At DateTime : {movie.Key}");
+}
+
+// Teacher Sol :
+
+SortedSet<DateTime> showtimes = new SortedSet<DateTime>
+        {
+            new DateTime(2024, 11, 19, 14, 0, 0),
+            new DateTime(2024, 11, 19, 12, 30, 0),
+            new DateTime(2024, 11, 19, 16, 15, 0)
+        };
+
+Console.WriteLine("Next showtime: " + showtimes.Min);
+Console.WriteLine("All showtimes:");
+foreach (var time in showtimes)
+{
+    Console.WriteLine(time.ToShortTimeString());
+}

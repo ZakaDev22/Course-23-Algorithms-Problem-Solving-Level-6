@@ -1,0 +1,28 @@
+
+
+List<string> listItems = new(["PC", "Laptop", "Zaka", "PC", "Laptop", "PC", "Aaaa", "Phone", "Phone", "Ba", "Casa"]);
+
+SortedSet<string> UniqueItems = new(listItems);
+
+Console.WriteLine($"\n\n Result Of All Items    : {string.Join(", ", listItems)}");
+
+foreach (var item in UniqueItems)
+{
+    Console.WriteLine($"\n Unique Item : {item}");
+}
+
+// Teacher Sol :
+
+SortedSet<string> shoppingCart = new SortedSet<string>
+        {
+            "Apple",
+            "Banana",
+            "Orange",
+            "Apple" // Duplicate, won't be added
+        };
+
+Console.WriteLine("Shopping cart items (sorted):");
+foreach (var item in shoppingCart)
+{
+    Console.WriteLine(item);
+}

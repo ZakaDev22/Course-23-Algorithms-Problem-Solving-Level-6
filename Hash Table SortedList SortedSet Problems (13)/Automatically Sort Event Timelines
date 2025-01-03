@@ -1,0 +1,33 @@
+
+SortedDictionary<DateTime, string> list = new()
+{
+    {DateTime.Now.AddDays(5),"Go To Buy New Phone" },
+    {DateTime.Now.AddDays(15) ,"Study New Course" },
+    {DateTime.Now.AddDays(20) ,"Go To Buy New Books In Another City" },
+    {DateTime.Now.AddDays(35) ,"Bay New Things" },
+    {DateTime.Now.AddDays(55) ,"Study New Things" },
+
+
+};
+
+Console.WriteLine("\n\n My timeline of events by their occurrence times to show the upcoming ones first.\n\n");
+foreach (var Events in list)
+{
+    Console.WriteLine($"\n Event : {Events.Value} At DateTime : {Events.Key.ToShortDateString()}");
+}
+
+// Teacher Sol :
+
+SortedSet<DateTime> eventTimeline = new SortedSet<DateTime>
+        {
+            new DateTime(2024, 12, 25),
+            new DateTime(2024, 11, 30),
+            new DateTime(2025, 1, 1)
+        };
+
+
+Console.WriteLine("Upcoming events:");
+foreach (var eventTime in eventTimeline)
+{
+    Console.WriteLine(eventTime.ToShortDateString());
+}

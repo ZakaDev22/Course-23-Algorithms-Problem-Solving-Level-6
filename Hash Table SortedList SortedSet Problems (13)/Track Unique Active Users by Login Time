@@ -1,0 +1,30 @@
+
+SortedList<DateTime, string> list = new()
+{
+    {DateTime.Now,"Zakaria" },
+    {DateTime.Now.AddHours(-2) ,"Ziko" },
+    {DateTime.Now.AddHours(-3) ,"SS" },
+    {DateTime.Now.AddHours(-4) ,"Sama" },
+    {DateTime.Now.AddHours(-5) ,"z" },
+
+};
+
+foreach (var user in list.OrderByDescending(x => x.Key))
+{
+    Console.WriteLine($"\n User With Name {user.Value} Has Loged To The System In {user.Key}");
+}
+
+// Teacher Sol :
+
+SortedSet<DateTime> activeUsers = new SortedSet<DateTime>();
+
+// Simulate user login times
+activeUsers.Add(new DateTime(2024, 11, 19, 10, 0, 0));
+activeUsers.Add(new DateTime(2024, 11, 19, 10, 15, 0));
+activeUsers.Add(new DateTime(2024, 11, 19, 10, 10, 0));
+
+Console.WriteLine("Active users login times (sorted):");
+foreach (var time in activeUsers)
+{
+    Console.WriteLine(time);
+}

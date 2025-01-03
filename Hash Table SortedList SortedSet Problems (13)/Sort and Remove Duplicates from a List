@@ -1,0 +1,30 @@
+
+List<int> Numbers = new([1, 1, 2, 3, 4, 4, 5, 5, 6, 7, 8, 9, 9]);
+
+SortedSet<int> set = new(new HashSet<int>(Numbers.OrderBy(x => x)));
+SortedSet<int> set2 = new(Numbers);
+
+Console.WriteLine($"\n\n Result : {string.Join(", ", set)}");
+Console.WriteLine($"\n\n Result : {string.Join(", ", set2)}");
+
+// Teacher Sol :
+
+List<int> numbers = new List<int> { 5, 5, 3, 8, 8, 5, 2, 3, 1 };
+
+
+Console.WriteLine("Unique and sorted numbers:");
+foreach (var num in numbers)
+{
+    Console.WriteLine(num);
+}
+
+
+SortedSet<int> uniqueSortedNumbers = new SortedSet<int>(numbers);
+
+
+Console.WriteLine("\nUnique and sorted numbers:");
+foreach (var num in uniqueSortedNumbers)
+{
+    Console.WriteLine(num);
+}
+

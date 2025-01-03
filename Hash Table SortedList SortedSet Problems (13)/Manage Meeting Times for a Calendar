@@ -1,0 +1,28 @@
+
+SortedList<DateTime, string> list = new()
+{
+    {DateTime.Now , "meet CEO" },
+    {DateTime.Now.AddHours(3),"meet My Team To Talk About New Future" },
+    {DateTime.Now.AddDays(5),"meet My Friends" },
+};
+
+Console.WriteLine("\n\n Automatically organize meeting times chronologically for a daily calendar. \n\n");
+foreach (var meeting in list)
+{
+    Console.WriteLine($"\n Next Meeting  : {meeting.Value} At DateTime : {meeting.Key.ToShortDateString()}");
+}
+
+// Teacher Sol :
+
+SortedSet<TimeSpan> meetingTimes = new SortedSet<TimeSpan>
+        {
+            new TimeSpan(14, 0, 0), // 2:00 PM
+            new TimeSpan(9, 30, 0), // 9:30 AM
+            new TimeSpan(11, 0, 0)  // 11:00 AM
+        };
+
+Console.WriteLine("Today's meetings (sorted):");
+foreach (var time in meetingTimes)
+{
+    Console.WriteLine(time);
+}

@@ -1,0 +1,24 @@
+
+SortedSet<string> Tags = new(["All", "Funy", "Scary", "Romance", "Love", "Action", "Old", "Sad"]);
+
+foreach (var item in Tags)
+{
+    Console.WriteLine($"\n Tag Name : {item}");
+}
+
+// Teacher Sol :
+
+SortedSet<string> tags = new SortedSet<string>
+        {
+            "C#", "Programming", "Tutorial", "DotNet"
+        };
+
+// Add more tags
+tags.Add("Coding");
+tags.Add("Programming"); // Duplicate, won't be added
+
+Console.WriteLine("All Tags:");
+foreach (var tag in tags)
+{
+    Console.WriteLine(tag);
+}

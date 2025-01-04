@@ -1,0 +1,35 @@
+
+SortedList<int, bool> BokingSeats = new()
+{
+    {1,true},{2,false}, {3,true}, {4,false},{10,false},{5,true} 
+};
+
+Console.WriteLine($"\n\n All Seats Count = {BokingSeats.Count}");
+
+Console.WriteLine($"\n\n Boked Seats Count = {BokingSeats.Where(x => x.Value == true).Count()}");
+
+foreach (var v in BokingSeats)
+{
+    Console.WriteLine($" Seat Number {v.Key} Is {(v.Value == true ? "Boked" : "Bok This Seat ?")}");
+}
+
+// Teacher Sol :
+
+SortedSet<int> reservedSeats = new SortedSet<int> { 10, 20, 30 };
+
+
+reservedSeats.Add(25);
+
+
+if (!reservedSeats.Add(10))
+{
+    // Duplicate, won't be added
+    Console.WriteLine("\nSeat 10 is already reserved!\n");
+};
+
+
+Console.WriteLine("Reserved Seats:");
+foreach (var seat in reservedSeats)
+{
+    Console.WriteLine("Seat " + seat);
+}

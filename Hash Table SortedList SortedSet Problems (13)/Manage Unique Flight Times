@@ -1,0 +1,28 @@
+
+SortedList<DateTime, string> Flights = new()
+{
+    {DateTime.Now, "  Japan" },
+    {DateTime.Now.AddHours(3), "  France" },
+    {DateTime.Now.AddHours(5), "  Germany" },
+    {DateTime.Now.AddHours(10),"  Spain" }
+};
+
+foreach (var flight in Flights)
+{
+    Console.WriteLine($"\n Next Flight Will Be At {flight.Key} And It WIll Go To :{flight.Value}");
+}
+
+// Teacher Sol : 
+
+SortedSet<DateTime> flightTimes = new SortedSet<DateTime>
+        {
+            new DateTime(2024, 11, 19, 8, 0, 0),
+            new DateTime(2024, 11, 19, 12, 45, 0),
+            new DateTime(2024, 11, 19, 8, 0, 0) // Duplicate, won't be added
+        };
+
+Console.WriteLine("Flight times (sorted):");
+foreach (var time in flightTimes)
+{
+    Console.WriteLine(time.ToShortTimeString());
+}

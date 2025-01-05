@@ -1,0 +1,60 @@
+
+
+// # Problem 106 
+
+var Employee1 = new EmployeeNode<string>("Zakaria", "CEO");
+var Employee2 = new EmployeeNode<string>("Bob", "VB Of Marketing");
+var Employee3 = new EmployeeNode<string>("Lara", "VB Of Technology");
+var Employee4 = new EmployeeNode<string>("Charlie", "Marketing Manager");
+var Employee5 = new EmployeeNode<string>("Tom", "Architect");
+
+Employee1.ManageEmplyees.Add(Employee2);
+Employee1.ManageEmplyees.Add(Employee3);
+
+Employee2.ManageEmplyees.Add(Employee4);
+
+Employee3.ManageEmplyees.Add(Employee5);
+
+CompanyTree<string> Company = new CompanyTree<string>(Employee1);
+Company.PrintTree();
+
+
+public class EmployeeNode<T>
+{
+    public T Name { get; set; }
+    public T Position { get; set; }
+    public List<EmployeeNode<T>> ManageEmplyees { get; set; }
+
+    public EmployeeNode(T name, T position)
+    {
+        Name = name;
+        Position = position;
+        ManageEmplyees = new List<EmployeeNode<T>>();
+    }
+}
+
+
+public class CompanyTree<T>
+{
+    public EmployeeNode<T> root { get; set; }
+
+    public CompanyTree(EmployeeNode<T> FirstEmployee)
+    {
+        root = FirstEmployee;
+    }
+
+    public void PrintTree()
+    {
+        PrintTree(root);
+    }
+
+    private void PrintTree<T>(EmployeeNode<T> root, string indent = " ")
+    {
+        Console.WriteLine($"\n\n {indent} # {root.Position} : -> {root.Name}");
+
+        foreach (var child in root.ManageEmplyees)
+        {
+            PrintTree(child, indent + "  ");
+        }
+    }
+}

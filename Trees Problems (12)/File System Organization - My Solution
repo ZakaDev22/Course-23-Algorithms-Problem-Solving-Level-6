@@ -1,0 +1,82 @@
+
+
+var FirstDirectory = new FileTree<string>("Directory: root");
+var SecondDirectory = new Node<string>(" Directory: Documents");
+var ThirdDirectory = new Node<string>(" Directory: Photos");
+
+FirstDirectory.root.AddChildsert(SecondDirectory);
+FirstDirectory.root.AddChildsert(ThirdDirectory);
+
+
+SecondDirectory.Files.Add("File: Resume.docx");
+SecondDirectory.Files.Add("File: Project.pdf");
+
+ThirdDirectory.Files.Add("File: Vacation.jpg");
+ThirdDirectory.Files.Add("File: Diving.jpg");
+ThirdDirectory.Files.Add("File: Family.jpg");
+
+FirstDirectory.PrintTree();
+
+// Print Second Node Only :
+
+SecondDirectory.PrintNode();
+
+public class Node<T>
+{
+    public T Name { get; set; }
+    public List<Node<T>> Children { get; set; }
+    public List<string> Files { get; set; }
+
+    public Node(T name)
+    {
+        Name = name;
+        Children = new List<Node<T>>();
+        Files = new List<string>();
+    }
+
+    public void AddChildsert(Node<T> child)
+    {
+        Children.Add(child);
+    }
+
+    public void PrintNode(string indent = " ")
+    {
+        Console.WriteLine("\n\n" + indent + Name);
+
+        foreach (var item in Files)
+        {
+            Console.WriteLine($"\n\t {item}");
+        }
+    }
+}
+
+
+public class FileTree<T>
+{
+    public Node<T> root { get; set; }
+
+    public FileTree(T rootValue)
+    {
+        root = new Node<T>(rootValue);
+    }
+
+    public void PrintTree()
+    {
+        PrintTree(root);
+    }
+
+    private void PrintTree<T>(Node<T> root, string indent = " ")
+    {
+        Console.WriteLine("\n\n" + indent + root.Name);
+
+        foreach (var item in root.Files)
+        {
+            Console.WriteLine($"\n\t {item}");
+        }
+
+        foreach (var child in root.Children)
+        {
+            PrintTree(child, indent + "  ");
+        }
+    }
+}

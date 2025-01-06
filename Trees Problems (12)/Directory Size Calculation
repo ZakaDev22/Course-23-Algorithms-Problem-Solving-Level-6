@@ -1,0 +1,46 @@
+
+
+var root = new Node<string>("Directory: root");
+var SecondDirectory = new Node<string>(" Directory: Documents");
+var ThirdDirectory = new Node<string>(" Directory: Photos");
+
+root.Children.Add(SecondDirectory);
+root.Children.Add(ThirdDirectory);
+
+
+SecondDirectory.Files.Add("File: Resume.docx");
+SecondDirectory.Files.Add("File: Project.pdf");
+
+ThirdDirectory.Files.Add("File: Vacation.jpg");
+ThirdDirectory.Files.Add("File: Diving.jpg");
+ThirdDirectory.Files.Add("File: Family.jpg");
+
+Console.WriteLine($"\n\n All Files Count = {root.GetFilesCount()}");
+
+public class Node<T>
+{
+    public T Name { get; set; }
+    public List<Node<T>> Children { get; set; }
+    public List<string> Files { get; set; }
+
+    private int FilesCount = 0;
+
+    public Node(T name)
+    {
+        Name = name;
+        Children = new List<Node<T>>();
+        Files = new List<string>();
+    }
+
+    public int GetFilesCount()
+    {
+        FilesCount += Files.Count;
+
+        foreach (Node<T> node in Children)
+        {
+            FilesCount += node.Files.Count;
+        }
+
+        return FilesCount;
+    }
+}

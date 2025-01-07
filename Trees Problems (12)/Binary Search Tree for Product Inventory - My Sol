@@ -1,0 +1,113 @@
+
+
+
+BinarySearchTree<string> tree = new();
+
+tree.Insert(587, "Product1");
+tree.Insert(333, "Product2");
+tree.Insert(130, "Product3");
+tree.Insert(590, "Product4");
+tree.Insert(700, "Product9");
+tree.Insert(500, "Product10");
+tree.Insert(23, "Product5");
+
+
+
+tree.PrintTree();
+
+Console.WriteLine($"\n\n\n\t Is ID 23 Inside The tree ? {tree.Search(23)}");
+
+public class BinarySearchTreeNode<T> where T : IComparable<T>
+{
+    public int ID { get; set; }
+    public T Name { get; set; }
+    public BinarySearchTreeNode<T> Left { get; set; }
+    public BinarySearchTreeNode<T> Right { get; set; }
+
+    public BinarySearchTreeNode(int id, T value)
+    {
+        ID = id;
+        Name = value;
+        Left = null;
+        Right = null;
+    }
+}
+
+public class BinarySearchTree<T> where T : IComparable<T>
+{
+    public BinarySearchTreeNode<T> Root { get; private set; }
+
+    public BinarySearchTree()
+    {
+        Root = null;
+    }
+
+    public void Insert(int id, T Name)
+    {
+        Root = Insert(Root, id, Name);
+    }
+
+    private BinarySearchTreeNode<T> Insert(BinarySearchTreeNode<T> node, int id, T Name)
+    {
+        if (node == null)
+        {
+            return new BinarySearchTreeNode<T>(id, Name);
+        }
+        else if (id.CompareTo(node.ID) < 0)
+        {
+            node.Left = Insert(node.Left, id, Name);
+        }
+        else if (id.CompareTo(node.ID) > 0)
+        {
+            node.Right = Insert(node.Right, id, Name);
+        }
+
+        return node;
+    }
+
+    public bool Search(int id)
+    {
+        return Search(Root, id) != null;
+    }
+
+    private BinarySearchTreeNode<T> Search(BinarySearchTreeNode<T> node, int Id)
+    {
+        if (node == null || node.ID.Equals(Id))
+        {
+            return node;
+        }
+
+        if (Id.CompareTo(node.ID) < 0)
+        {
+            return Search(node.Left, Id);
+        }
+        else
+        {
+            return Search(node.Right, Id);
+        }
+    }
+
+    // Print the tree visually
+    public void PrintTree()
+    {
+        PrintTree(Root, 0);
+    }
+
+
+    private void PrintTree(BinarySearchTreeNode<T> root, int space)
+    {
+        int COUNT = 10;  // Distance between levels
+        if (root == null)
+            return;
+
+        space += COUNT;
+        PrintTree(root.Right, space);
+
+        Console.WriteLine();
+        for (int i = COUNT; i < space; i++)
+            Console.Write(" ");
+        Console.WriteLine($" {root.ID} - {root.Name}");
+        PrintTree(root.Left, space);
+    }
+
+}

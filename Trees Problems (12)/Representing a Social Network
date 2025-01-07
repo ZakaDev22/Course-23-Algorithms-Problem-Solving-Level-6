@@ -1,0 +1,37 @@
+
+MyLinkedIn LinkedIn = new("Zakaria Elfakhar");
+
+LinkedIn.AddConnection("Bob");
+LinkedIn.AddConnection("Tom");
+LinkedIn.AddConnection("Lisa");
+
+LinkedIn.PrintConnection();
+
+public class MyLinkedIn
+{
+    private string ProfileName { get; set; }
+
+    private List<string> Connections { get; set; }
+
+    public MyLinkedIn(string Name)
+    {
+        ProfileName = Name;
+        Connections = new();
+    }
+
+    public void AddConnection(string ConnectionName)
+    {
+        Connections.Add(ConnectionName);
+    }
+
+    public void PrintConnection()
+    {
+        Console.WriteLine($"\n\n {ProfileName}  Social Network : ");
+
+        Console.WriteLine($"\n\n # {ProfileName}");
+        foreach (var item in Connections)
+        {
+            Console.WriteLine($"\n\t #{item}");
+        }
+    }
+}

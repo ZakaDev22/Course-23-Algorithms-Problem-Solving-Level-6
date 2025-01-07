@@ -1,0 +1,43 @@
+
+MyNode quetions = new();
+
+quetions.MakeLunchDecision();
+
+class MyNode
+{
+    public List<string> Questions = new()
+    {
+        "Do You want To Eat",
+        "Do You Like To Eat From The Old Menu",
+        "Do You Like Sea Food"
+    };
+
+    public void MakeLunchDecision()
+    {
+        string answer = string.Empty;
+
+        while (Questions.Count > 0)
+        {
+            Console.WriteLine($"\n\t {Questions[0]} ??");
+
+            answer = Console.ReadLine().Trim().ToLower();
+
+            Questions.RemoveAt(0);
+
+            if (answer == "yes") continue;
+            else
+            {
+                break;
+            }
+        }
+
+        if (answer == "yes")
+        {
+            Console.WriteLine($"\n\n You can eat caviar with tuna and sardines.");
+        }
+        else
+        {
+            Console.WriteLine($"\n\n You Can Have Some Drinks Instead");
+        }
+    }
+}

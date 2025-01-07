@@ -1,0 +1,26 @@
+
+clsPriorityScheduling MyTasks = new();
+
+MyTasks.Add("task A", 3);
+MyTasks.Add("task B", 1);
+MyTasks.Add("task C", 2);
+
+MyTasks.ExecutingTasksInPriorityOrder();
+
+public class clsPriorityScheduling
+{
+    private SortedDictionary<int, string> Tasks = new();
+
+    public void Add(string task, int priority)
+    {
+        Tasks.Add(priority, task);
+    }
+
+    public void ExecutingTasksInPriorityOrder()
+    {
+        foreach (var item in Tasks)
+        {
+            Console.WriteLine($"\n\n Task : {item.Value}, Priority : {item.Key}");
+        }
+    }
+}

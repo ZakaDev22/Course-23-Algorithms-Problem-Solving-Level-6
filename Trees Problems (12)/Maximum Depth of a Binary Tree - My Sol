@@ -1,0 +1,96 @@
+
+
+var binaryTree = new BinaryTree<int>();
+
+binaryTree.Insert(5);
+binaryTree.Insert(3);
+binaryTree.Insert(8);
+binaryTree.Insert(1);
+binaryTree.Insert(10);
+binaryTree.Insert(6);
+binaryTree.Insert(9);
+binaryTree.Insert(15);
+
+Console.WriteLine($"\n\n The Max Depth = {binaryTree.MaxDepth(binaryTree.Root)}");
+
+public class BinaryTreeNode<T>
+{
+    public T Value { get; set; }
+    public BinaryTreeNode<T> Left { get; set; }
+    public BinaryTreeNode<T> Right { get; set; }
+
+    public BinaryTreeNode(T value)
+    {
+        Value = value;
+        Left = null;
+        Right = null;
+    }
+}
+
+
+public class BinaryTree<T>
+{
+    public BinaryTreeNode<T> Root { get; private set; }
+
+    public BinaryTree()
+    {
+        Root = null;
+    }
+
+    public int MaxDepth(BinaryTreeNode<T> node)
+    {
+        if (node is null)
+            return 0;
+
+        int LeftMaxDepht = MaxDepth(node.Left);
+        int RightMaxDepth = MaxDepth(node.Right);
+
+        return Math.Max(LeftMaxDepht, RightMaxDepth) + 1;
+
+    }
+
+    public void Insert(T value)
+    {
+
+        var newNode = new BinaryTreeNode<T>(value); // Create a new node
+        if (Root == null) // If the tree is empty, set the new node as the root
+        {
+            Root = newNode;
+            return;
+        }
+
+
+        // Use a queue to perform level-order insertion
+        Queue<BinaryTreeNode<T>> queue = new Queue<BinaryTreeNode<T>>();
+        queue.Enqueue(Root);
+
+
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+
+
+            // Attempt to insert the new node in the first empty spot in level order
+            if (current.Left == null)
+            {
+                current.Left = newNode;
+                break;
+            }
+            else
+            {
+                queue.Enqueue(current.Left);
+            }
+
+
+            if (current.Right == null)
+            {
+                current.Right = newNode;
+                break;
+            }
+            else
+            {
+                queue.Enqueue(current.Right);
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+
+CategoriesNode Electronics = new("Electronics");
+CategoriesNode Mobiles = new("Mobiles");
+CategoriesNode Laptops = new("Laptops");
+
+CategoriesNode Samsung = new("Samsung");
+CategoriesNode Apple = new("Apple");
+CategoriesNode Lenovo = new("Lenovo");
+CategoriesNode HP = new("HP");
+
+Electronics.AddCategory(Mobiles);
+Electronics.AddCategory(Laptops);
+
+Mobiles.AddCategory(Samsung);
+Mobiles.AddCategory(Apple);
+
+Laptops.AddCategory(Lenovo);
+Laptops.AddCategory(HP);
+
+Electronics.Print();
+
+public class CategoriesNode
+{
+    public string Name { get; set; }
+
+    private List<CategoriesNode> ChildCategory = [];
+
+    public CategoriesNode(string name)
+    {
+        Name = name;
+    }
+
+    public void AddCategory(CategoriesNode FileNode)
+    {
+        ChildCategory.Add(FileNode);
+    }
+
+    public void Print(string indent = "")
+    {
+        Console.WriteLine($"\n {indent}# {Name}");
+
+        foreach (var child in ChildCategory)
+        {
+            child.Print(indent + "    ");
+        }
+    }
+}

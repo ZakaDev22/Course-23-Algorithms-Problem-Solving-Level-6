@@ -1,0 +1,52 @@
+
+FilePermissionsNode root = new("root", -1);
+FilePermissionsNode Folder1 = new("Folder1", 22);
+FilePermissionsNode File1 = new("File1", 0);
+FilePermissionsNode Folder2 = new("Folder2", 7);
+FilePermissionsNode File2 = new("File2", 3);
+
+root.AddChildFile(Folder1);
+root.AddChildFile(Folder2);
+
+Folder1.AddChildFile(File1);
+Folder2.AddChildFile(File2);
+
+Console.WriteLine($"\n\n\t File Permissions : \n\n");
+
+root.Print();
+
+public class FilePermissionsNode
+{
+    public string Name { get; set; }
+    public int Permissions { get; set; }
+
+    private List<FilePermissionsNode> ChildFiles = [];
+
+    public FilePermissionsNode(string name, int permissions)
+    {
+        Name = name;
+        Permissions = permissions;
+    }
+
+    public void AddChildFile(FilePermissionsNode FileNode)
+    {
+        if (FileNode.Permissions <= 0)
+        {
+            FileNode.Permissions = this.Permissions;
+            ChildFiles.Add(FileNode);
+        }
+        else
+            ChildFiles.Add(FileNode);
+    }
+
+    public void Print()
+    {
+        Console.WriteLine($"\n\t {Name} : {Permissions}");
+
+        foreach (var child in ChildFiles)
+        {
+            child.Print();
+        }
+    }
+}
+
